@@ -40,7 +40,6 @@ router.get('/', async (req, res) => {
     const icons = await Icon.find()?.populate('createdBy', 'username');
     res.json(icons);
   } catch (err) {
-    console.log(err)
     res.status(500).json({ message: err.message });
   }
 });

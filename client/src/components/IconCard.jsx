@@ -1,23 +1,63 @@
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import { hoverSound, clickSound } from '../utils/sounds';
-import { useTheme } from '../context/ThemeContext';
-import { FiDownload, FiHeart, FiShare } from 'react-icons/fi';
-import ShareButton from "./ShareButton" 
+import { hoverSound, clickSound, successSound, errorSound } from '../utils/sounds';
+import { FiDownload, FiHeart } from 'react-icons/fi';
 
-const IconCard = ({ icon, onDownload, onFavorite }) => {
-  const { theme } = useTheme();
+const IconCard = ({ icon, onFavoriteUpdate }) => {
+  const { user } = useAuth();
+  const [isFavorite, setIsFavorite] = useState(icon.isFavorite || false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFavorite = async () => {
+    if (!user) {
+      // Redirect to login if not authenticated
+      window.location.href = '/auth';
+      return;
+    }
+
+    setIsProcessing(true);
+    try {
+      clickSound.play();
+      const token = localStorage.getItem('token');
+      const method = isFavorite ? 'DELETE' : 'POST';
+      const response = await fetch(`/api/users/favorites/${icon._id}`, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to ${isFavorite ? 'remove from' : 'add to'} favorites`);
+      }
+
+      // Toggle the favorite status
+      setIsFavorite(!isFavorite);
+      successSound.play();
+      
+      // Notify parent component of the change
+      if (onFavoriteUpdate) {
+        onFavoriteUpdate(icon._id, !isFavorite);
+      }
+    } catch (err) {
+      errorSound.play();
+      console.error('Favorite error:', err);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 5.3 }}
+      transition={{ duration: 0.3 }}
       whileHover={{ scale: 1.05 }}
       onMouseEnter={() => hoverSound.play()}
-      className={`rounded-lg overflow-hidden shadow-md ${
-        theme === 'dark' ? 'bg-gradient-to-r from-gray-400 to-slate-200' : 'bg-white'
-      }`}
+      className="rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800"
     >
       <div className="p-4 flex flex-col items-center">
         <div
@@ -30,7 +70,7 @@ const IconCard = ({ icon, onDownload, onFavorite }) => {
             whileTap={{ scale: 0.9 }}
             onClick={() => {
               clickSound.play();
-              onDownload(icon);
+              // Handle download
             }}
             className="p-2 rounded-full bg-blue-500 text-white"
           >
@@ -38,15 +78,16 @@ const IconCard = ({ icon, onDownload, onFavorite }) => {
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.9 }}
-            onClick={() => {
-              clickSound.play();
-              onFavorite(icon);
-            }}
-            className="p-2 rounded-full bg-pink-500 text-white"
+            onClick={handleFavorite}
+            disabled={isProcessing}
+            className={`p-2 rounded-full ${
+              isFavorite 
+                ? 'bg-red-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+            }`}
           >
-            <FiHeart />
+            <FiHeart className={isFavorite ? 'fill-current' : ''} />
           </motion.button>
-          <ShareButton icon={<FiShare/>}/>
         </div>
       </div>
     </motion.div>

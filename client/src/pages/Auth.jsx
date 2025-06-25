@@ -5,13 +5,15 @@ import { useTheme } from '../context/ThemeContext';
 import { clickSound, successSound, errorSound } from "../utils/Sounds";
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
-import { FcGoogle } from 'react-icons/fc';
-import { FiGithub } from 'react-icons/fi';
+// import { FcGoogle } from 'react-icons/fc';
+// import { FiGithub } from 'react-icons/fi';
+import { useAuth } from "../context/AuthContext";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 const Auth = () => {
   const navigate = useNavigate();
-
-  const [isLogin, setIsLogin] = useState(true);
+  const { login } = useAuth();
+   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,7 +21,6 @@ const Auth = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
   const { theme } = useTheme()
 
 
@@ -64,13 +65,32 @@ const Auth = () => {
     }
   };
 
+  const handleGoogleSuccess = async (data) => {
+    try {
+      const { token, user } = data;
+      login(token, user);
+      successSound.play();
+      navigate('/');
+    } catch (err) {
+      errorSound.play();
+      console.log(err);
+      setError('Failed to authenticate with Google');
+    }
+  };
+
+  const handleGoogleFailure = (error) => {
+    errorSound.play();
+    console.log(error)
+    setError(error.message || 'Google login failed');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-end py-12 md:pr-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`w-full max-w-md p-16 rounded-l-2xl md:rounded-l-full shadow-2xl border-2  border-black mask-radial-[100%_100%] mask-radial-from-85% mask-radial-at-left  ${
+        className={`w-full max-w-md p-16 md:p-24 rounded-l-2xl md:rounded-l-full shadow-2xl border-2  border-black mask-radial-[100%_100%] mask-radial-from-85% mask-radial-at-left  ${
           theme === "dark"
             ? "bg-gray-500 bg-transparent outline"
             : "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
@@ -180,7 +200,21 @@ const Auth = () => {
               : "Already have an account? Login"}
           </Button>
         </div>
-        <div className="mt-6">
+
+        <div className="space-y-4">
+          <div className="flex items-center my-4">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="mx-4 text-gray-500">or</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div>
+          <GoogleLoginButton
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
+          />
+
+        </div>
+
+        {/* <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
@@ -211,7 +245,7 @@ const Auth = () => {
               <span>GitHub</span>
             </Button>
           </div>
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );

@@ -29,27 +29,37 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!user?.isAdmin || !activeTab) return;
+
+      setLoading(true);
+      setError(null);
       try {
         const token = localStorage.getItem("token");
+        if (!token) throw new Error("No authentication token found");
+
         const response = await fetch(`/api/admin/${activeTab}`, {
           method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+           },
+          credentials: "include"
         });
-
+       console.log(response);
+       
         if (!response.ok) {    
           throw new Error("Access denied or failed to fetch data");
         }
 
         const data = await response.json();
+        console.log(data);
+        
         if (activeTab === "users") {
           setUsers(data);
         } else {
           setIcons(data);
         }
       } catch (err) {
-        errorSound.play();
-        console.log(err);
-        
+        errorSound.play();        
         setError(err.message);
       } finally {
         setLoading(false);

@@ -1,11 +1,18 @@
 import jwt from "jsonwebtoken"
 
 export const authenticate = (req, res, next) => {
+  
   // Get token from header
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-
+  const token = req.header('Authorization')?.replace('Bearer ', '') || 
+                req.header('authorization')?.replace('Bearer ', '') ||
+                req.cookies?.token;
+  
   if (!token) {
-    return res.status(401).json({ message: 'No token, authorization denied' });
+    return res.status(401).json({ 
+        success: false,
+        message: 'Authorization token required',
+        code: 'MISSING_TOKEN'
+      });
   }
 
   try {

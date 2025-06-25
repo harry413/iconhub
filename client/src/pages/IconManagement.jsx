@@ -113,7 +113,7 @@ const IconManagement = () => {
           />
         </div>
       ) : (
-        <div className="rounded-md border">
+        <div className="rounded-md border-b">
           <Table>
             <TableHeader>
               <TableRow>

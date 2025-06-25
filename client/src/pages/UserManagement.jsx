@@ -27,7 +27,11 @@ const UserManagement = () => {
       try {
         const token = localStorage.getItem('token');
         const response = await fetch('/api/admin/users', {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
         });
 
         if (!response.ok) {
@@ -148,7 +152,7 @@ const UserManagement = () => {
           />
         </div>
       ) : (
-        <div className="rounded-md border">
+        <div className="rounded-md border-b">
           <Table>
             <TableHeader>
               <TableRow>

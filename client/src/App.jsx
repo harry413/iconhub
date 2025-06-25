@@ -17,7 +17,7 @@ import Settings from './pages/Settings'
 import Analytics from "./pages/Analytics"
 import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
-
+import UserSetting from "./pages/UserSetting"
 function App() {
 
   return (
@@ -32,6 +32,7 @@ function App() {
             <Route path="/icons/:id" element={<IconDetail />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/settings" element={<UserSetting />} />
             <Route path="/profile" element={<Profile />} />
             <Route
               path="/admin/*"
