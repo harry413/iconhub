@@ -224,9 +224,16 @@ router.post('/register', async (req, res) => {
     user.verificationToken = verificationToken;
     user.isVerified = false;
     await user.save();
-
     // Send verification email (pseudo-code)
     sendVerificationEmail(user.email, verificationToken);
+
+    // Define sendVerificationEmail function
+    function sendVerificationEmail(email, token) {
+      // In production, use nodemailer or similar to send real emails.
+      // Here, just log the verification link for demonstration.
+      const verificationUrl = `${process.env.FRONTEND_URL || "http://localhost:5173"}/verify-email?token=${token}`;
+      console.log(`Send verification email to ${email}: ${verificationUrl}`);
+    }
 
     res.status(201).json({ 
       message: 'Registration successful. Please check your email to verify your account.',

@@ -1,12 +1,31 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+
+const getToken = (req) => {
+  // Check all possible locations
+  const authHeader = req.headers['authorization'] || req.headers['Authorization'];
+  const tokenFromHeader = authHeader?.startsWith('Bearer ') 
+    ? authHeader.split(' ')[1] 
+    : null;
+  
+  const tokenFromCookie = req.cookies?.token;
+  const tokenFromBody = req.body?.token;
+  const tokenFromQuery = req.query?.token;
+
+  console.log('Token sources:', {
+    header: tokenFromHeader,
+    cookie: tokenFromCookie,
+    body: tokenFromBody,
+    query: tokenFromQuery
+  });
+
+  return tokenFromHeader || tokenFromCookie || tokenFromBody || tokenFromQuery;
+};
 
 export const authenticate = (req, res, next) => {
-  
   // Get token from header
-  const token = req.header('Authorization')?.replace('Bearer ', '') || 
-                req.header('authorization')?.replace('Bearer ', '') ||
-                req.cookies?.token;
-  
+    const token = getToken(req);
+    console.log(token);
+    
   if (!token) {
     return res.status(401).json({ 
         success: false,

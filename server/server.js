@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config();
 import express from "express";
+import cookieParser from 'cookie-parser';
 import mongoose from "mongoose";
 import cors from "cors"
 import path from "path";
@@ -8,17 +9,24 @@ import Icons from "./routes/iconRoutes.js";
 import Users from "./routes/userRoutes.js"; 
 import Admin from "./routes/adminRoutes.js"
 
+
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+app.use(cookieParser());
 app.use(cors())
-app.use(cors({
-  origin: "http://localhost:5173", // Or your specific frontend URL
-  credentials: true,
-  exposedHeaders: ['Authorization', ['authorization']] // Ensure headers aren't blocked
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Or your specific frontend URL
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", ["authorization"]], // Ensure headers aren't blocked
+  })
+);
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 
 mongoose
 .connect(process.env.MONGO_URL, {
@@ -30,6 +38,7 @@ mongoose
   .catch((err) => console.log("connection error in mongodb", err));
 
   app.get('/' ,(req, res) => {
+    res.send("Welcome to Icon Library API");
     console.log("hello frnds!!!!!");
   })
   

@@ -44,14 +44,12 @@ const AdminDashboard = () => {
            },
           credentials: "include"
         });
-       console.log(response);
        
         if (!response.ok) {    
           throw new Error("Access denied or failed to fetch data");
         }
 
         const data = await response.json();
-        console.log(data);
         
         if (activeTab === "users") {
           setUsers(data);

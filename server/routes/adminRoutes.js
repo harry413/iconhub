@@ -8,7 +8,7 @@ import Icon from '../models/icon.js';
 // Get all users
 router.get('/users', authenticate, adminOnly, async (req, res) => {
   try {
-    const users = await User.find().select('-password');
+    const users = await User.find().select('username');
     res.json(users);
   } catch (err) {
     console.log(err);

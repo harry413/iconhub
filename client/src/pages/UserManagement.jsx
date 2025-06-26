@@ -21,17 +21,18 @@ const UserManagement = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('/api/admin/users', {
+        clickSound.play();
+        const response = await fetch("/api/admin/users", {
+          method: "GET",
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
           },
-          credentials: 'include'
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -39,7 +40,13 @@ const UserManagement = () => {
         }
 
         const data = await response.json();
-        setUsers(data);
+        if (Array.isArray(data)) {
+          setUsers(data);
+        } else if (Array.isArray(data.users)) {
+          setUsers(data.users);
+        } else {
+          throw new Error('Invalid user data received from server');
+        }
         successSound.play();
       } catch (err) {
         errorSound.play();
@@ -64,12 +71,14 @@ const UserManagement = () => {
   const toggleAdminStatus = async (userId) => {
     try {
       clickSound.play();
-      const token = localStorage.getItem('token');
+      
       const response = await fetch(`/api/admin/users/${userId}/toggle-admin`, {
         method: 'PATCH',
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Content-Type': 'application/json'
+         },
       });
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to update user');
       }

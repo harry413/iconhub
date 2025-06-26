@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext';
+
 import { motion } from 'framer-motion';
 import { clickSound, errorSound, successSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
