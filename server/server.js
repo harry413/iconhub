@@ -7,7 +7,7 @@ import cors from "cors";
 import path from "path";
 import Icons from "./routes/iconRoutes.js";
 import Users from "./routes/userRoutes.js";
-import Admin from "../api/adminRoutes.js";
+import Admin from "./routes/adminRoutes.js";
 
 const app = express();
 
@@ -52,4 +52,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(PORT, () => console.log(`server running on port:${PORT}`));
-export default app;
+

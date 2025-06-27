@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { googleAuth } from "../server/auth/googleStrategy.js";
+import { googleAuth } from "../auth/googleStrategy.js";
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import { authenticate, adminOnly } from "../server/middleware/auth.js";
-import User from "../server/models/user.js";
-import Icon from "../server/models/icon.js";
+import { authenticate, adminOnly } from "../middleware/auth.js";
+import User from "../models/user.js";
+import Icon from "../models/icon.js";
 
 // Get all users
 router.get("/users", authenticate, adminOnly, async (req, res) => {
