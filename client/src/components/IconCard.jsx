@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import { hoverSound, clickSound, successSound, errorSound } from '../utils/sounds';
+import { hoverSound, clickSound, successSound, errorSound } from '../utils/Sounds';
 import { FiDownload } from 'react-icons/fi';
 import { TiHeart } from "react-icons/ti";
 
