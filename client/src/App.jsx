@@ -18,7 +18,7 @@ import Analytics from "./pages/Analytics"
 import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
 import UserSetting from "./pages/UserSetting"
-import Background from './components/bg'
+import Background from './components/Bg'
 function App() {
 
   return (
