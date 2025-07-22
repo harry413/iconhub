@@ -5,7 +5,6 @@ import { useTheme } from '../context/ThemeContext';
 import { clickSound, successSound, errorSound } from "../utils/Sounds";
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
-import Background from '../components/bg'
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 
@@ -95,7 +94,6 @@ const Auth = () => {
           : "bg-transparent md:border-black shadow-black"
           }`}
           >
-        <Background/>
         <h2 className="text-2xl font-bold mb-6 text-center">
           {isLogin ? "Login" : "Register"}
         </h2>

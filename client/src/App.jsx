@@ -18,11 +18,12 @@ import Analytics from "./pages/Analytics"
 import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
 import UserSetting from "./pages/UserSetting"
+import Background from './components/bg'
 function App() {
 
   return (
     <ThemeProvider>
-      
+      <Background />
       <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
         <Navbar />
         <AnimatePresence mode="wait">
