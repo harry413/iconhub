@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from 'url';
 import Icons from "./routes/iconRoutes.js";
 import Users from "./routes/userRoutes.js";
 import Admin from "./routes/adminRoutes.js";
@@ -43,6 +44,9 @@ app.use("/api/icons", Icons);
 app.use("/api/users", Users);
 app.use("/api/admin", Admin);
 // app.use("/uploads", express.static(path.join(__dirname, "../client/src/pages/uploads")));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
