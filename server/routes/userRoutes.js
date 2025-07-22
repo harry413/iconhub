@@ -152,23 +152,7 @@ router.delete("/me", authenticate, async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
-// // TEMPORARY ROUTE -CREATING FIRST ADMIN
-// router.post('/make-admin', async (req, res) => {
-//   try {
-//     const { email } = req.body;
-//     const user = await User.findOneAndUpdate(
-//       { email },
-//       { isAdmin: true },
-//       { new: true }
-//     );
-    
-//     if (!user) return res.status(404).json({ message: 'User not found' });
-//     res.json({ message: 'User promoted to admin', user });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
+;
 
 //get all users (for admin purposes, if needed)
 router.get('/', async (req, res) => {
