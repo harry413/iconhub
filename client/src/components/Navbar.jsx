@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
-import { hoverSound, clickSound } from '../utils/sounds';
+import { hoverSound, clickSound } from './utils/Sounds';
 import { Button } from "../components/ui/button"
 import ThemeToggle from './ThemeToggle';
 import UserDropdown from './UserDropdown';
