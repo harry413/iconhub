@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import AdminDashboard from './pages/AdminDashboard';
 import Profile from "./pages/Profile";
 import Favorites from "./pages/Favorites"
-import AdminLayout from './layout/AdminLayout';
+import AdminLayout from './Layout/AdminLayout';
 import RequireAuth from './components/RequireAuth';
 import Settings from './pages/Settings'
 import Analytics from "./pages/Analytics"
