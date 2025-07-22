@@ -8,7 +8,6 @@ import { Button } from "../components/ui/button"
 import ThemeToggle from './ThemeToggle';
 import UserDropdown from './UserDropdown';
 import { Menu, X } from 'react-feather';
-import { TiInfoLarge } from "react-icons/ti";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
