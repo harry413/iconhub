@@ -8,6 +8,7 @@ import { Button } from "../components/ui/button"
 import ThemeToggle from './ThemeToggle';
 import UserDropdown from './UserDropdown';
 import { Menu, X } from 'react-feather';
+import { TiInfoLarge } from "react-icons/ti";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +20,15 @@ const Navbar = () => {
     { name: 'Icon Library', path: '/icons' },
     { name: 'Upload', path: '/upload' },
     { name: 'favorite', path:'/favorite'}
-    // Auth link will be conditionally rendered
-
   ];
 
+  const { logout } = useAuth();
   return (
-    <nav className={`py-4 px-6  ${theme === 'dark' ? "bg-transparent":'bg-transparent'}`}>
+    <nav
+      className={`py-4 px-6  ${
+        theme === "dark" ? "bg-transparent" : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
@@ -32,13 +36,21 @@ const Navbar = () => {
           onMouseEnter={() => hoverSound.play()}
           onClick={() => clickSound.play()}
         >
-          <span className={`mr-2 text-transparent bg-clip-text ${theme === 'dark' ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]":'bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]'}`}>IconHub</span>
-          <motion.span
+          <span
+            className={`mr-2 text-2xl font-bold text-transparent bg-clip-text ${
+              theme === "dark"
+                ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
+                : "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"
+            }`}
+          >
+            HarryIconify
+          </span>
+          {/* <motion.span
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ duration: 0.5 }}
           >
             🎨
-          </motion.span>
+          </motion.span> */}
         </Link>
 
         <div className="hidden md:flex items-center space-x-6">
@@ -53,7 +65,7 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          
+
           {/* Conditional rendering based on auth status */}
           {user ? (
             <div className="flex items-center gap-4">
@@ -64,7 +76,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <Link
                 to="/auth"
-                className="hover:text-blue-500 transition-colors"
+                className="hover:text-gray-700 dark:hover:text-gray-400 transition-colors"
                 onMouseEnter={() => hoverSound.play()}
                 onClick={() => clickSound.play()}
               >
@@ -91,7 +103,7 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden"
@@ -110,7 +122,7 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              
+
               {/* Mobile auth links */}
               <div className="px-4 py-2">
                 {user ? (
@@ -161,7 +173,7 @@ const Navbar = () => {
                   </Link>
                 )}
               </div>
-              
+
               <div className="px-4 py-2">
                 <ThemeToggle />
               </div>

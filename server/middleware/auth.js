@@ -11,12 +11,6 @@ const getToken = (req) => {
   const tokenFromBody = req.body?.token;
   const tokenFromQuery = req.query?.token;
 
-  console.log('Token sources:', {
-    header: tokenFromHeader,
-    cookie: tokenFromCookie,
-    body: tokenFromBody,
-    query: tokenFromQuery
-  });
 
   return tokenFromHeader || tokenFromCookie || tokenFromBody || tokenFromQuery;
 };
@@ -24,7 +18,6 @@ const getToken = (req) => {
 export const authenticate = (req, res, next) => {
   // Get token from header
     const token = getToken(req);
-    console.log(token);
     
   if (!token) {
     return res.status(401).json({ 

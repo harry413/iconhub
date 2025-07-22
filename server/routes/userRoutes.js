@@ -329,7 +329,6 @@ router.post('/favorites/:iconId', authenticate, async (req, res) => {
     if (user.favorites.includes(req.params.iconId)) {
       return res.status(400).json({ message: 'Icon already in favorites' });
     }
-
     user.favorites.push(req.params.iconId);
     await user.save();
 

@@ -1,71 +1,160 @@
-import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
-import { hoverSound } from '../utils/sounds';
-import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import React from "react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
-  const { theme } = useTheme();
+  const footerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
-    <footer className={`mt-auto py-8 bg-transparent ${theme === 'dark' ? "bg-transparent":'bg-gradient-to-r from-[#abbaab] to-[#ffffff]'}`}>
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4 md:mb-0"
-          >
-            <h2 className={`text-xl font-bold text-transparent bg-clip-text ${theme === 'dark' ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]":'bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]'}`}>IconHub</h2>
-            <p className="text-sm mt-2">
-              A beautiful collection of free icons for your projects
-            </p>
+    <motion.footer
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={footerVariants}
+      className="bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18] text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
+    >
+      <div className="container mx-auto ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {/* Logo Section */}
+          <motion.div variants={itemVariants}>
+            <h2 className="text-2xl font-bold mb-4 dark:text-gray-200">
+              HarryIconify
+            </h2>
           </motion.div>
 
-          <div className="flex space-x-6">
-            <motion.a
-              whileHover={{ y: -2 }}
-              onMouseEnter={() => hoverSound.play()}
-              href="https://github.com/harry413"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <FaGithub className="w-6 h-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ y: -2 }}
-              onMouseEnter={() => hoverSound.play()}
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-            >
-              <FaTwitter className="w-6 h-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ y: -2 }}
-              onMouseEnter={() => hoverSound.play()}
-              href="https://www.linkedin.com/in/sachin-patidar-921578213/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="w-6 h-6" />
-            </motion.a>
-          </div>
+          {/* Applications Section */}
+          <motion.div variants={itemVariants} className="gap-8">
+            <h3 className="text-lg font-semibold mb-4 uppercase text-black dark:text-gray-200">
+              Applications
+            </h3>
+            <ul className="space-y-4">
+              {[
+                "Apparel",
+                "Automotive",
+                "Filtration",
+                "Customised Nonwoven",
+              ].map((item) => (
+                <motion.li
+                  key={item}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <a
+                    href="#"
+                    className="hover:text-gray-500 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
+                  >
+                    {item}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Company Section */}
+          <motion.div variants={itemVariants}>
+            <h3 className="text-lg font-semibold mb-4 uppercase text-black dark:text-gray-200">
+              Company
+            </h3>
+            <ul className="space-y-4">
+              {[
+                "Who We Are",
+                "Global Competency",
+                "Innovation",
+                "ESG Impact",
+              ].map((item) => (
+                <motion.li
+                  key={item}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <a
+                    href="#"
+                    className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
+                  >
+                    {item}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* More Section */}
+          <motion.div variants={itemVariants}>
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-4 uppercase text-black dark:text-gray-200">
+                More
+              </h3>
+              <ul className="space-y-4">
+                {["Contact Us", "Careers"].map((item) => (
+                  <motion.li
+                    key={item}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <a
+                      href="#"
+                      className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
+                    >
+                      {item}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4 uppercase text-black dark:text-gray-200">
+                Follow Us
+              </h3>
+              <motion.div className="flex space-x-4" variants={itemVariants}>
+                <motion.a
+                  href="#"
+                  aria-label="LinkedIn"
+                  whileHover={{ y: -3 }}
+                  className="hover:text-gray-400 transition-colors dark:text-gray-300 text-sm dark:hover:text-gray-300"
+                >
+                  LinkedIn
+                </motion.a>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
 
+        {/* Divider */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 pt-8 border-t text-center text-sm"
+          variants={itemVariants}
+          className="border-t border-gray-700 my-6 dark:border-gray-200"
+        />
+
+        {/* Bottom Section */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col md:flex-row justify-between items-center"
         >
-          <p>© {new Date().getFullYear()} IconHub. All rights reserved.</p>
+          <div className="mb-4 md:mb-0 text-gray-700 text-sm dark:text-gray-200">
+            ©2024. All Rights Reserved.
+          </div>
+          <div className="text-gray-700 text-center text-sm md:text-right dark:text-gray-200">
+            Apollo Tower, 110, Vijay Nagar, Indore - 450001.
+          </div>
         </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

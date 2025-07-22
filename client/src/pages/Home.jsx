@@ -1,8 +1,13 @@
-import { motion } from 'framer-motion';
+import React from "react"
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
 import { useTheme } from '../context/ThemeContext';
 import { hoverSound, clickSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
+import { IoDiamond } from "react-icons/io5";
+import { FaFileArchive, FaIcons } from "react-icons/fa";
+import { GiCircleSparks } from "react-icons/gi";
+import Background from '../components/bg'
 
 const Home = () => {
   const { theme } = useTheme();
@@ -11,27 +16,28 @@ const Home = () => {
     {
       title: 'Thousands of Icons',
       description: 'Access our vast collection of high-quality icons for all your projects.',
-      icon: '🖼️'
+      icon: <FaIcons/>
     },
     {
       title: 'Multiple Formats',
       description: 'Download icons in SVG, PNG formats to fit your needs.',
-      icon: '📁'
+      icon: <FaFileArchive/>
     },
     {
       title: 'Easy to Use',
       description: 'Simple interface to browse, search and download icons quickly.',
-      icon: '✨'
+      icon: <GiCircleSparks/>
     },
     {
       title: 'Free & Premium',
       description: 'Choose from our free collection or upgrade for premium icons.',
-      icon: '💎'
+      icon: <IoDiamond />
     }
   ];
 
   return (
     <div className="container mx-auto px-4 py-24 ">
+      <Background/>
       <section className="text-center mb-20">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -39,7 +45,9 @@ const Home = () => {
           className="text-4xl md:text-5xl font-bold mb-6"
         >
           Beautiful Icons for{" "}
-          <span className="text-neutral-700 dark:text-neutral-500">Your Projects</span>
+          <span className="text-neutral-700 dark:text-neutral-500">
+            Your Projects
+          </span>
         </motion.h1>
 
         <motion.p
@@ -61,7 +69,7 @@ const Home = () => {
           <Link to="/icons" onClick={() => clickSound.play()}>
             <Button className="px-4 py-2 cursor-pointer">Browse Icons</Button>
           </Link>
-          <Link to="/upload" onClick={() => clickSound.play()} >
+          <Link to="/upload" onClick={() => clickSound.play()}>
             <Button variant="outline" className="px-4 py-2  cursor-pointer ">
               Upload Icons
             </Button>
@@ -88,13 +96,13 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
               onMouseEnter={() => hoverSound.play()}
-              className={`p-6 rounded-xl backdrop-blur-xs ${
+              className={`p-6 rounded-xl backdrop-blur-xs  ${
                 theme === "dark"
-                  ? " bg-transparent outline border-2 "
-                  : "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
+                  ? " bg-transparent outline border-2 shadow-md shadow-gray-400 "
+                  : "bg-gradient-to-r from-[#abbaab] to-[#ffffff] shadow-xl shadow-gray-900"
               }`}
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
+              <div className="text-4xl mb-4 animate-pulse">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-gray-900 dark:text-gray-400">
                 {feature.description}

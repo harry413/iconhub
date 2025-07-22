@@ -51,14 +51,50 @@ const IconLibrary = () => {
   const categories = ['all', ...new Set(icons.map(icon => icon.category))];
 
   const handleDownload = (icon) => {
-    // Download logic here
+    // Create a temporary link to download the SVG/icon file
+    const svgData = icon.svg; // assuming icon.svg contains SVG markup as string
+    const blob = new Blob([svgData], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${icon.name}.svg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
     console.log('Downloading:', icon.name);
   };
 
+  const [favorites, setFavorites] = useState(() => {
+    // Load favorites from localStorage if available
+    const stored = localStorage.getItem('favorites');
+    return stored ? JSON.parse(stored) : [];
+  });
+
   const handleFavorite = (icon) => {
-    // Favorite logic here
-    console.log('Favoriting:', icon.name);
+    setFavorites(prev => {
+      let updated;
+      if (prev.some(fav => fav._id === icon._id)) {
+        updated = prev.filter(fav => fav._id !== icon._id);
+      } else {
+        updated = [...prev, icon];
+      }
+      localStorage.setItem('favorites', JSON.stringify(updated));
+      return updated;
+    });
   };
+
+  useEffect(() => {
+    // Optionally, update filteredIcons to mark favorites
+    setFilteredIcons(prev =>
+      prev.map(icon => ({
+        ...icon,
+        isFavorite: favorites.some(fav => fav._id === icon._id),
+      }))
+    );
+  }, [favorites]);
 
   return (
     <div className="container mx-auto px-4 py-8">

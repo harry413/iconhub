@@ -22,7 +22,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      {/* //bg-gradient-to-tl from-gray-50 via-gray-300 to-gray-400  */}
+      
       <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
         <Navbar />
         <AnimatePresence mode="wait">

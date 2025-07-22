@@ -5,8 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { clickSound, successSound, errorSound } from "../utils/Sounds";
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
-// import { FcGoogle } from 'react-icons/fc';
-// import { FiGithub } from 'react-icons/fi';
+import Background from '../components/bg'
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 
@@ -85,26 +84,26 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-end py-12 md:pr-24">
+    <div className="min-h-screen flex items-center justify-evenly py-12 ">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`w-full max-w-md p-16 md:p-24 rounded-l-2xl md:rounded-l-full shadow-2xl border-2  border-black mask-radial-[100%_100%] mask-radial-from-85% mask-radial-at-left  ${
+        className={`z-50 w-full max-w-md p-8 md:px-24 md:py-28 md:rounded-full shadow-2xl md:border-2   ${
           theme === "dark"
-            ? "bg-gray-500 bg-transparent outline"
-            : "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
-        }`}
-      >
+          ? " bg-transparent outline md:border-white shadow-white"
+          : "bg-transparent md:border-black shadow-black"
+          }`}
+          >
+        <Background/>
         <h2 className="text-2xl font-bold mb-6 text-center">
           {isLogin ? "Login" : "Register"}
         </h2>
-
         {error && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className=""
+            className="text-red-600"
           >
             {error}
           </motion.div>
@@ -211,41 +210,7 @@ const Auth = () => {
             onSuccess={handleGoogleSuccess}
             onFailure={handleGoogleFailure}
           />
-
         </div>
-
-        {/* <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                Or continue with
-              </span>
-            </div>
-          </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <Button
-              variant="outline"
-              
-              className="flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <FcGoogle className="h-5 w-5" />
-              <span>Google</span>
-            </Button>
-
-            <Button
-              variant="outline"
-              className="flex items-center justify-center gap-2 cursor-pointer"
-              disabled
-            >
-              <FiGithub className="h-5 w-5" />
-              <span>GitHub</span>
-            </Button>
-          </div>
-        </div> */}
       </motion.div>
     </div>
   );

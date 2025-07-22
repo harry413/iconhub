@@ -1,7 +1,8 @@
 
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { TiAdjustBrightness } from "react-icons/ti";
+import { AiFillMoon } from "react-icons/ai";
 import { clickSound } from '../utils/sounds';
 
 const ThemeToggle = () => {
@@ -19,9 +20,9 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
     >
       {theme === 'light' ? (
-        <FiMoon className="w-5 h-5" />
+        <AiFillMoon className="w-5 h-5" />
       ) : (
-        <FiSun className="w-5 h-5" />
+        <TiAdjustBrightness className="w-5 h-5" />
       )}
     </motion.button>
   );

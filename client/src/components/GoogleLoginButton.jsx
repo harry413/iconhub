@@ -38,7 +38,7 @@ const GoogleLoginButton = () => {
             size: 'large',
             text: 'continue_with',
             shape: 'rectangular',
-            logo_alignment: 'left',
+            logo_alignment: 'right',
             width: '300px',
           }
         );
@@ -87,7 +87,7 @@ const GoogleLoginButton = () => {
   }, [login, navigate]);
 
   return (
-    <div className="w-full flex justify-center py-2">
+    <div className=" flex justify-center py-2">
       <div 
         ref={buttonRef} 
         className="w-full max-w-[300px]"

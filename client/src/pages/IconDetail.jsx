@@ -88,7 +88,7 @@ const IconDetail = () => {
       successSound.play();
     } catch (err) {
       errorSound.play();
-      setError(err.message);
+      setError(err.message || String(err));
     }
   };
 
