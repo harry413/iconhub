@@ -43,26 +43,6 @@ const upload = multer({
   },
 });
 
-// Update user profile
-router.put("/me", authenticate, async (req, res) => {
-  try {
-    const { username, email } = req.body;
-
-    const user = await User.findByIdAndUpdate(
-      req.user.userId,
-      { username, email },
-      { new: true, runValidators: true }
-    ).select("-password");
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(user);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
 
 // Update password
 router.put("/update-password", authenticate, async (req, res) => {
