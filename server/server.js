@@ -16,14 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
 app.use(cors());
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Or your specific frontend URL
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", ["authorization"]], // Ensure headers aren't blocked
-  })
-);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
