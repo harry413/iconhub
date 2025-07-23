@@ -37,7 +37,6 @@ app.use("/api/icons", Icons);
 app.use("/api/users", Users);
 
 app.use("/api/admin", Admin);
-// app.use("/uploads", express.static(path.join(__dirname, "../client/src/pages/uploads")));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
