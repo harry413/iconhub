@@ -44,6 +44,41 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/search', async (req, res) => {
+  try {
+    const { query, category, sort, limit } = req.query;
+    const searchQuery = {};
+
+    if (query) {
+      searchQuery.$or = [
+        { name: { $regex: query, $options: 'i' } },
+        { tags: { $regex: query, $options: 'i' } }
+      ];
+    }
+
+    if (category && category !== 'all') {
+      searchQuery.category = category;
+    }
+
+    let sortOption = {};
+    if (sort === 'popular') {
+      sortOption = { downloads: -1 };
+    } else if (sort === 'newest') {
+      sortOption = { createdAt: -1 };
+    } else if (sort === 'oldest') {
+      sortOption = { createdAt: 1 };
+    }
+
+    const icons = await Icon.find(searchQuery)
+      .sort(sortOption)
+      .limit(parseInt(limit) || 100)
+      .populate('createdBy', 'username');
+
+    res.json(icons);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 // Get icon by ID
 router.get('/:id', async (req, res) => {
   try {
@@ -92,40 +127,5 @@ router.post(
 );
 
 // Advanced search
-router.get('/search', async (req, res) => {
-  try {
-    const { query, category, sort, limit } = req.query;
-    const searchQuery = {};
-
-    if (query) {
-      searchQuery.$or = [
-        { name: { $regex: query, $options: 'i' } },
-        { tags: { $regex: query, $options: 'i' } }
-      ];
-    }
-
-    if (category && category !== 'all') {
-      searchQuery.category = category;
-    }
-
-    let sortOption = {};
-    if (sort === 'popular') {
-      sortOption = { downloads: -1 };
-    } else if (sort === 'newest') {
-      sortOption = { createdAt: -1 };
-    } else if (sort === 'oldest') {
-      sortOption = { createdAt: 1 };
-    }
-
-    const icons = await Icon.find(searchQuery)
-      .sort(sortOption)
-      .limit(parseInt(limit) || 100)
-      .populate('createdBy', 'username');
-
-    res.json(icons);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 export default router;
