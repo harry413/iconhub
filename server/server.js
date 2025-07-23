@@ -31,11 +31,11 @@ app.get("/", (req, res) => {
   res.send("Welcome to Icon Library API");
   console.log("hello frnds!!!!!");
 });
-console.log("Mounting icons...");
+
 app.use("/api/icons", Icons);
-console.log("Mounting users...");
+
 app.use("/api/users", Users);
-console.log("Mounting admin...");
+
 app.use("/api/admin", Admin);
 // app.use("/uploads", express.static(path.join(__dirname, "../client/src/pages/uploads")));
 
