@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const getToken = (req) => {
+export const generateToken = (req) => {
   // Check all possible locations
   const authHeader = req.headers['authorization'] || req.headers['Authorization'];
   const tokenFromHeader = authHeader?.startsWith('Bearer ') 

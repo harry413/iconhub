@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import Icons from "./routes/iconRoutes.js";
 import Users from "./routes/userRoutes.js";
 import Admin from "./routes/adminRoutes.js";
+import Auth from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.get("/", (req, res) => {
 app.use("/api/icons", Icons);
 
 app.use("/api/users", Users);
-
+app.use("/api/auth", Auth)
 app.use("/api/admin", Admin);
 
 const __filename = fileURLToPath(import.meta.url);
