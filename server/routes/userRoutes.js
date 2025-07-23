@@ -132,7 +132,6 @@ router.delete("/me", authenticate, async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-;
 
 //get all users (for admin purposes, if needed)
 router.get('/', async (req, res) => {

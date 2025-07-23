@@ -126,6 +126,5 @@ router.post(
   }
 );
 
-// Advanced search
 
 export default router;
