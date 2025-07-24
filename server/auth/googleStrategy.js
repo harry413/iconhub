@@ -1,6 +1,9 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/user.js";
 import { generateToken } from "../middleware/auth.js";
+import dotenv from "dotenv";
+
+dotenv.config(); 
 
 export const googleAuth = (passport) => {
   passport.use(

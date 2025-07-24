@@ -16,9 +16,8 @@ export const generateToken = (req) => {
 };
 
 export const authenticate = (req, res, next) => {
-  // Get token from header
-    const token = getToken(req);
-    
+ 
+    const token = generateToken(req);
   if (!token) {
     return res.status(401).json({ 
         success: false,

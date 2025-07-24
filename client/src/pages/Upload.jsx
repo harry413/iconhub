@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import {motion} from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 import { useAuth } from "../context/AuthContext";
 import { clickSound, successSound, errorSound } from '../utils/Sounds';
 import { Input } from '../components/ui/input';
@@ -114,7 +113,7 @@ const Upload = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 mt-12 mb-8 outline rounded-l-md rounded-tr-full  outline-black">
+    <div className="container mx-auto px-4 py-8 mt-12 mb-8  rounded-l-md rounded-tr-full outline-black bg-transparent border-2 shadow-md shadow-gray-400">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
