@@ -41,6 +41,7 @@ console.log("manual Admin....")
 app.use("/api/admin", Admin);
 console.log("manual Auth....")
 app.use("/api/auth", Auth);
+console.log("all routes done")
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
