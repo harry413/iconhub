@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 
-const PARTICLE_COUNT = 60;
+const PARTICLE_COUNT = 110;
 const LINE_DISTANCE = 100; // Maximum distance for drawing lines between particles
 
 function randomBetween(a, b) {
