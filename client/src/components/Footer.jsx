@@ -44,10 +44,10 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               {[
-                "Apparel",
-                "Automotive",
-                "Filtration",
-                "Customised Nonwoven",
+                "Authors",
+                "Icons",
+                "Animated icons",
+                "icon tags",
               ].map((item) => (
                 <motion.li
                   key={item}
@@ -74,8 +74,9 @@ const Footer = () => {
               {[
                 "Who We Are",
                 "Global Competency",
-                "Innovation",
-                "ESG Impact",
+                "Our License",
+                "Blog",
+                "Whats new"
               ].map((item) => (
                 <motion.li
                   key={item}
