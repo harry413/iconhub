@@ -14,6 +14,7 @@ import {
 } from '../components/ui/table';
 import { FiEdit, FiTrash2, FiSearch, FiUserPlus } from 'react-icons/fi';
 import { Badge } from '../components/ui/badge';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const UserManagement = () => {
   const { user: currentUser } = useAuth();
@@ -26,7 +27,7 @@ const UserManagement = () => {
     const fetchUsers = async () => {
       try {
         clickSound.play();
-        const response = await fetch("/api/admin/users", {
+        const response = await fetch(`${BASE_URL}/api/admin/users`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -71,8 +72,8 @@ const UserManagement = () => {
   const toggleAdminStatus = async (userId) => {
     try {
       clickSound.play();
-      
-      const response = await fetch(`/api/admin/users/${userId}/toggle-admin`, {
+
+      const response = await fetch(`${BASE_URL}/api/admin/users/${userId}/toggle-admin`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}`,
           'Content-Type': 'application/json'
@@ -104,7 +105,7 @@ const UserManagement = () => {
     try {
       clickSound.play();
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/admin/users/${userId}`, {
+      const response = await fetch(`${BASE_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

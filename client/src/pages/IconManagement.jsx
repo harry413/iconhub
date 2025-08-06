@@ -14,6 +14,7 @@ import {
 } from '../components/ui/table';
 import { FiSearch, FiTrash2, FiDownload, FiEye } from 'react-icons/fi';
 import { Badge } from '../components/ui/badge';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const IconManagement = () => {
   const [icons, setIcons] = useState([]);
@@ -25,7 +26,7 @@ const IconManagement = () => {
     const fetchIcons = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('/api/admin/icons', {
+        const response = await fetch(`${BASE_URL}/api/admin/icons`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -62,7 +63,7 @@ const IconManagement = () => {
     try {
       clickSound.play();
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/admin/icons/${iconId}`, {
+      const response = await fetch(`${BASE_URL}/api/admin/icons/${iconId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "../components/ui/table";
 import { Button } from "../components/ui/button";
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const AdminDashboard = () => {
   const {user}  = useAuth();
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No authentication token found");
 
-        const response = await fetch(`/api/admin/${activeTab}`, {
+        const response = await fetch(`${BASE_URL}/api/admin/${activeTab}`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
@@ -73,7 +74,7 @@ const AdminDashboard = () => {
     try {
       clickSound.play();
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/admin/users/${userId}/toggle-admin`, {
+      const response = await fetch(`${BASE_URL}/api/admin/users/${userId}/toggle-admin`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -98,7 +99,7 @@ const AdminDashboard = () => {
     try {
       clickSound.play();
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/admin/icons/${iconId}`, {
+      const response = await fetch(`${BASE_URL}/api/admin/icons/${iconId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

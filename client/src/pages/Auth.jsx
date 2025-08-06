@@ -7,6 +7,7 @@ import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Auth = () => {
     setError('');
 
     try {
-      const url = isLogin ? '/api/users/login' : '/api/users/register';
+      const url = isLogin ? '${BASE_URL}/api/users/login' : '${BASE_URL}/api/users/register';
       const response = await fetch(url, {
         method: 'POST',
         headers: {

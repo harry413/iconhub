@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { successSound, errorSound } from '../utils/Sounds';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const AuthContext = createContext({
   user: null,
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const response = await fetch('/api/users/me', {
+        const response = await fetch(`${BASE_URL}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
  const login = async (email, password) => {
     try {
-      const response = await fetch('/api/users/login', {
+      const response = await fetch(`${BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

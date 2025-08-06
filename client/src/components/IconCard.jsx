@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { hoverSound, clickSound, successSound, errorSound } from '../utils/Sounds';
 import { FiDownload } from 'react-icons/fi';
 import { TiHeart } from "react-icons/ti";
-
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const IconCard = ({ icon, onFavoriteUpdate }) => {
   const { user } = useAuth();
@@ -31,8 +31,7 @@ const IconCard = ({ icon, onFavoriteUpdate }) => {
       const token = localStorage.getItem('token');
       const Method = isFavorite ? 'DELETE' : 'POST';
 
-     
-      const response = await fetch(`/api/users/favorites/${icon._id}`, {
+      const response = await fetch(`${BASE_URL}/api/users/favorites/${icon._id}`, {
         method: Method,
         headers: {
           'Content-Type': 'application/json',

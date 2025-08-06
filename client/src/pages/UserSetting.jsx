@@ -10,6 +10,7 @@ import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiSave, FiUpload, FiTrash2 } from 'react-icons/fi';
 // import AvatarEditor from 'react-avatar-editor';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const UserSetting = () => {
   const { user, updateUser } = useAuth();
@@ -79,7 +80,7 @@ const UserSetting = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/users/me', {
+      const response = await fetch(`${BASE_URL}/api/users/me`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +120,7 @@ const UserSetting = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/users/update-password', {
+      const response = await fetch(`${BASE_URL}/api/users/update-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -151,7 +152,7 @@ const UserSetting = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/users/preferences', {
+      const response = await fetch(`${BASE_URL}/api/users/preferences`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -220,7 +221,7 @@ const UserSetting = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/users/me', {
+      const response = await fetch(`${BASE_URL}/api/users/me`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

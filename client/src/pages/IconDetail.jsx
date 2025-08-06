@@ -6,6 +6,7 @@ import { clickSound, successSound, errorSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { FiDownload, FiHeart, FiArrowLeft } from 'react-icons/fi';
 import ShareButton from '../components/ShareButton';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const IconDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const IconDetail = () => {
   useEffect(() => {
     const fetchIcon = async () => {
       try {
-        const response = await fetch(`/api/icons/${id}`);
+        const response = await fetch(`${BASE_URL}/api/icons/${id}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -31,7 +32,7 @@ const IconDetail = () => {
     // Check if icon is in favorites (would need to implement this)
         const token = localStorage.getItem('token');
         if (token) {
-          const favResponse = await fetch('/api/users/me', {
+          const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           const userData = await favResponse.json();
@@ -72,7 +73,7 @@ const IconDetail = () => {
       }
 
       const method = isFavorite ? 'DELETE' : 'POST';
-      const response = await fetch(`/api/users/favorites/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/users/favorites/${id}`, {
         method,
         headers: {
           'Content-Type': 'application/json',

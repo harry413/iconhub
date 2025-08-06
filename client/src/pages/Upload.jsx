@@ -7,6 +7,7 @@ import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const Upload = () => {
   const { user } = useAuth();
@@ -63,7 +64,7 @@ const Upload = () => {
       form.append('png', formData.pngFile);
 
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/icons', {
+      const response = await fetch(`${BASE_URL}/api/icons`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`

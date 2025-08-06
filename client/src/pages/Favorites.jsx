@@ -5,6 +5,7 @@ import IconCard from "../components/IconCard";
 import { motion } from "framer-motion";
 import { clickSound, errorSound } from "../utils/Sounds";
 import { Button} from "../components/ui/button"
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 
 const Favorites = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Favorites = () => {
     const fetchFavorites = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("/api/users/favorites", {
+        const response = await fetch(`${BASE_URL}/api/users/favorites`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -43,7 +44,7 @@ const Favorites = () => {
     try {
       clickSound.play();
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/users/favorites/${iconId}`, {
+      const response = await fetch(`${BASE_URL}/api/users/favorites/${iconId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
