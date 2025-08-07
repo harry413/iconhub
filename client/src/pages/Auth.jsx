@@ -37,7 +37,7 @@ const Auth = () => {
     setError('');
 
     try {
-      const url = isLogin ? '${BASE_URL}/api/users/login' : '${BASE_URL}/api/users/register';
+      const url = isLogin ? `${BASE_URL}/api/users/login` : `${BASE_URL}/api/users/register`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
