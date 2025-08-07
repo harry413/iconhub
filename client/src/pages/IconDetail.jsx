@@ -6,7 +6,7 @@ import { clickSound, successSound, errorSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { FiDownload, FiHeart, FiArrowLeft } from 'react-icons/fi';
 import ShareButton from '../components/ShareButton';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const IconDetail = () => {
   const { id } = useParams();

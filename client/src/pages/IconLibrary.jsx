@@ -5,7 +5,7 @@ import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { successSound } from '../utils/Sounds';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const IconLibrary = () => {
   const [icons, setIcons] = useState([]);

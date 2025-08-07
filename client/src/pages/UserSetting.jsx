@@ -10,7 +10,7 @@ import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiSave, FiUpload, FiTrash2 } from 'react-icons/fi';
 // import AvatarEditor from 'react-avatar-editor';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const UserSetting = () => {
   const { user, updateUser } = useAuth();

@@ -23,7 +23,7 @@ const GoogleLoginButton = () => {
     const initializeGoogle = () => {
       if (window.google && buttonRef.current) {
         window.google.accounts.id.initialize({
-          client_id: import.meta.env.REACT_APP_GOOGLE_CLIENT_ID,
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
           callback: handleCredentialResponse,
           ux_mode: 'popup',
           auto_select: false,
@@ -53,7 +53,7 @@ const GoogleLoginButton = () => {
         clickSound.play();
         
         // Send credential to your backend
-        const res = await fetch(`${import.meta.env.REACT_APP_API_URL}/api/auth/google`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

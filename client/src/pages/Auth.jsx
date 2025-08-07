@@ -7,7 +7,7 @@ import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "../components/GoogleLoginButton";
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const Auth = () => {
   const navigate = useNavigate();

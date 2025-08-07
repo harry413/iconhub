@@ -2,7 +2,7 @@
 export const initializeGoogleAuth = (onSuccess, onFailure) => {
   if (window.google) {
     window.google.accounts.id.initialize({
-      client_id: import.meta.env.REACT_APP_GOOGLE_CLIENT_ID,
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: async (response) => {
         try {
           const res = await handleGoogleLogin(response.credential);
@@ -28,7 +28,7 @@ export const renderGoogleButton = (elementId) => {
 
 const handleGoogleLogin = async (credential) => {
   const response = await fetch(
-    `${import.meta.env.REACT_APP_API_URL}/api/auth/google`,
+    `${import.meta.env.VITE_API_URL}/api/auth/google`,
     {
       method: "POST",
       headers: {

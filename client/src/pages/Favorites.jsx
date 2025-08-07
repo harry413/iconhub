@@ -5,7 +5,7 @@ import IconCard from "../components/IconCard";
 import { motion } from "framer-motion";
 import { clickSound, errorSound } from "../utils/Sounds";
 import { Button} from "../components/ui/button"
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const Favorites = () => {
   const navigate = useNavigate();

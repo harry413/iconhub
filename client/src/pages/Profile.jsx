@@ -6,7 +6,7 @@ import { clickSound, errorSound, successSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { FiUser, FiMail, FiSave } from 'react-icons/fi';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const Profile = () => {
   const { user } = useAuth();

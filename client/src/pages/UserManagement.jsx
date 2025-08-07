@@ -14,7 +14,7 @@ import {
 } from '../components/ui/table';
 import { FiEdit, FiTrash2, FiSearch, FiUserPlus } from 'react-icons/fi';
 import { Badge } from '../components/ui/badge';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const UserManagement = () => {
   const { user: currentUser } = useAuth();
