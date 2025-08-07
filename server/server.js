@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use(cookieParser());
-app.use(cors({origin : process.env.CLIENT_URL, credentials: true})); // Allow requests from the client URL and allow credentials
+// Allow requests from the client URL and allow credentials
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || origin.endsWith('.vercel.app')) {
