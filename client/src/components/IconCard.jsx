@@ -85,14 +85,14 @@ const IconCard = ({ icon, onFavoriteUpdate }) => {
       transition={{ duration: 0.3 }}
       whileHover={{ scale: 1.05 }}
       onMouseEnter={() => hoverSound.play()}
-      className="rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800"
+      className="rounded-lg overflow-hidden shadow-md bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600"
     >
       <div className="p-4 flex flex-col items-center">
         <div
-          className="w-16 h-16 mb-4 flex items-center justify-center"
+          className="w-16 h-16 mb-4 flex items-center justify-center "
           dangerouslySetInnerHTML={{ __html: icon.svg }}
         />
-        <h3 className="text-lg font-medium text-center mb-2">{icon.name}</h3>
+        <h3 className="text-lg font-medium text-center mb-2 text-white">{icon.name}</h3>
         <div className="flex space-x-2 mt-auto">
           <motion.button
             whileTap={{ scale: 0.9 }}

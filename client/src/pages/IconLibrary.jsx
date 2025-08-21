@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { successSound } from '../utils/Sounds';
 const BASE_URL = import.meta.env.VITE_API_URL;
-console.log('BASE_URL:', BASE_URL);
+
 
 const IconLibrary = () => {
   const [icons, setIcons] = useState([]);
