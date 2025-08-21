@@ -1,11 +1,11 @@
 import express from "express";
 import passport from "passport";
-// import { googleAuth } from "../auth/googleStrategy.js";
+import { googleAuth } from "../auth/googleStrategy.js";
 
 const router = express.Router();
 
-// Initialize Google Strategy
-// googleAuth(passport);
+//Initialize Google Strategy
+googleAuth(passport);
 
 // Google OAuth routes
 router.get(
