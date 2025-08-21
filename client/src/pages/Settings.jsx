@@ -59,9 +59,9 @@ const Settings = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Settings</h1>
+        
         <Button onClick={handleSave} disabled={isLoading}>
-          <FiSave className="mr-2" />
+          <FiSave className="mr-2 " />
           {isLoading ? "Saving..." : "Save Changes"}
         </Button>
       </div>
@@ -78,7 +78,7 @@ const Settings = () => {
       )}
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3 md:grid-cols-5">
+        <TabsList className=" w-full flex items-center justify-center overflow-scroll ">
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="email">Email</TabsTrigger>

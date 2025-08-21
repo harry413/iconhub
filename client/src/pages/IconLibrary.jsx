@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { successSound } from '../utils/Sounds';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-
 const IconLibrary = () => {
   const [icons, setIcons] = useState([]);
   const [filteredIcons, setFilteredIcons] = useState([]);

@@ -47,7 +47,7 @@ const Analytics = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Analytics</h1>
+      
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm">
             <FiCalendar className="mr-2" />

@@ -50,11 +50,6 @@ const AdminLayout = () => {
         transition={{ type: "spring", stiffness: 100 }}
         className={`hidden md:flex flex-col w-64 border-r border-gray-200 shadow-lg`}
       >
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <h1 className="text-xl font-bold flex items-center gap-2">
-            <span className={` text-transparent bg-clip-text ${theme === 'dark' ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]" : 'bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]'}`}>IconHub</span>
-          </h1>
-        </div>
 
         <div className="flex-1 overflow-y-auto">
           <nav className="p-4 space-y-1">

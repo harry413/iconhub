@@ -125,7 +125,6 @@ const UserManagement = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="text-2xl font-bold">User Management</h1>
         <div className="flex gap-2">
           <div className="relative">
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -138,7 +137,7 @@ const UserManagement = () => {
           </div>
           <Button>
             <FiUserPlus className="mr-2" />
-            Add User
+            <span className="hidden md:flex">Add User</span>
           </Button>
         </div>
       </div>
