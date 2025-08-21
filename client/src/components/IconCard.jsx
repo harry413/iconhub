@@ -92,7 +92,7 @@ const IconCard = ({ icon, onFavoriteUpdate }) => {
           className="w-16 h-16 mb-4 flex items-center justify-center "
           dangerouslySetInnerHTML={{ __html: icon.svg }}
         />
-        <h3 className="text-lg font-medium text-center mb-2 text-white">{icon.name}</h3>
+        <h3 className="text-xsm font-medium text-center mb-2 text-white">{icon.name}</h3>
         <div className="flex space-x-2 mt-auto">
           <motion.button
             whileTap={{ scale: 0.9 }}
