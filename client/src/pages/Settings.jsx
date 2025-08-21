@@ -77,8 +77,8 @@ const Settings = () => {
         </motion.div>
       )}
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className=" w-full flex items-center justify-center overflow-scroll ">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="">
+        <TabsList className=" w-full flex items-start justify-start overflow-scroll ">
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="email">Email</TabsTrigger>
