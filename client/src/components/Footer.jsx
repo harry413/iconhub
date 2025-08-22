@@ -26,7 +26,7 @@ const Footer = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       variants={footerVariants}
-      className="bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18] text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
+      className="bg-gradient-to-r  dark:from-slate-900 dark:to-slate-500 from-gray-300 to-gray-200 text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
     >
       <div className="container mx-auto ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -47,7 +47,7 @@ const Footer = () => {
                 "Authors",
                 "Icons",
                 "Animated icons",
-                "icon tags",
+                "Icon tags",
               ].map((item) => (
                 <motion.li
                   key={item}

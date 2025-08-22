@@ -62,7 +62,7 @@ const Favorites = () => {
 
   if (!user) {
     return (
-      <div className="text-center py-12 h-screen pt-24">
+      <div className="text-center py-12 min-h-screen pt-24">
         <h2 className="text-2xl mb-4">Please login to view your favorites</h2>
         <Button
           onClick={() => {
