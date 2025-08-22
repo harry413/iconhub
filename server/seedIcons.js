@@ -15,7 +15,7 @@ await mongoose.connect(process.env.MONGO_URL, {
 console.log("✅ Connected to MongoDB");
 
 // Folder where your icons are stored
-const iconsDir = path.join(process.cwd(), "icons");
+const iconsDir = path.join(process.cwd(), "out");
 
 // Read all files in folder
 const files = fs.readdirSync(iconsDir);
