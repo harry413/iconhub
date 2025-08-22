@@ -6,7 +6,7 @@ import { FiDownload } from 'react-icons/fi';
 import { TiHeart } from "react-icons/ti";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-const IconCard = ({ icon, onFavoriteUpdate }) => {
+const IconCard = ({ icon, onFavorite, onClick, onDownload }) => {
   const { user } = useAuth();
   const [isFavorite, setIsFavorite] = useState(icon.isFavorite || false );
   const [isProcessing, setIsProcessing] = useState(false);
@@ -84,6 +84,7 @@ const IconCard = ({ icon, onFavoriteUpdate }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       whileHover={{ scale: 1.05 }}
+      onClick={onClick}
       onMouseEnter={() => hoverSound.play()}
       className="rounded-lg overflow-hidden shadow-md bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600"
     >

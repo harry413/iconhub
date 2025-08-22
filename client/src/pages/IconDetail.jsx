@@ -159,7 +159,7 @@ const IconDetail = () => {
           <div className="flex flex-col md:flex-row gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex-1 flex items-center justify-center p-8 bg-gray-100 dark:bg-gray-700 rounded-lg"
+              className="flex-1 flex items-center justify-center p-8 bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600 rounded-lg"
             >
               <div
                 className="w-full h-64 flex items-center justify-center"
@@ -193,7 +193,7 @@ const IconDetail = () => {
               </div>
 
               <div className="flex flex-wrap gap-4 mt-8">
-                <ShareButton icon={icon} />
+                <ShareButton icon={icon} className="z-10" />
                 <Button
                   onClick={() => handleDownload("svg")}
                   className="flex items-center"

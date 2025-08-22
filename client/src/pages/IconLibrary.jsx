@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
@@ -13,6 +14,11 @@ const IconLibrary = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+const handleIconClick = (id) => {
+  navigate(`/icons/${id}`);
+};
 
   useEffect(() => {
     const fetchIcons = async () => {
@@ -145,6 +151,7 @@ const IconLibrary = () => {
               icon={icon}
               onDownload={handleDownload}
               onFavorite={handleFavorite}
+              onClick={() => handleIconClick(icon._id)}
             />
           ))}
         </div>
