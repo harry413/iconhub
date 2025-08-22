@@ -34,8 +34,9 @@ const Navbar = () => {
           onMouseEnter={() => hoverSound.play()}
           onClick={() => clickSound.play()}
         >
+          <img src="/hilogo.png" alt="logo" className=" h-10 w-8 text-center mr-4"/>
           <span
-            className={`mr-2 text-2xl font-bold text-transparent bg-clip-text ${
+            className={`hidden md:flex mr-2 text-2xl font-bold text-transparent bg-clip-text ${
               theme === "dark"
                 ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
                 : "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"

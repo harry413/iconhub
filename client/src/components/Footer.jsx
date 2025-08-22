@@ -31,7 +31,9 @@ const Footer = () => {
       <div className="container mx-auto ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Logo Section */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex flex-col items-center justify-center">
+            <img src="/hilogo.png" alt="logo" className=" h-10 w-8 md:h-30 md:w-24 text-center"/>
+            
             <h2 className="text-2xl font-bold mb-4 dark:text-gray-200">
               HarryIconify
             </h2>
