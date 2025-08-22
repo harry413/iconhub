@@ -9,12 +9,12 @@ import LoadingScreen from "./components/LoadingScreen";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+        <BrowserRouter>
       <Suspense fallback={<LoadingScreen />}>
-    <BrowserRouter>
-    <AuthProvider>
-      <App /> 
-    </AuthProvider>
-    </BrowserRouter>
+        <AuthProvider>
+          <App /> 
+        </AuthProvider>
       </Suspense>
+    </BrowserRouter>
   </StrictMode>,
 )

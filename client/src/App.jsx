@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,11 +20,13 @@ import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
 import UserSetting from "./pages/UserSetting"
 import Background from './components/Bg'
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
 
   return (
     <ThemeProvider>
+      
       <Background />
       <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
         <Navbar />
