@@ -29,15 +29,15 @@ const Footer = () => {
       className="bg-gradient-to-r  dark:from-slate-900 dark:to-slate-500 from-gray-300 to-gray-200 text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
     >
       <div className="container mx-auto ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Logo Section */}
           <motion.div variants={itemVariants} className="flex flex-col items-center justify-center">
-            <img src="/hilogo.png" alt="logo" className=" h-10 w-8 md:h-30 md:w-24 text-center"/>
+            <img src="/hilogo.png" alt="logo" className=" h-16 w-12 md:h-30 md:w-24 text-center"/>
             
             <h2 className="text-2xl font-bold mb-4 dark:text-gray-200">
               HarryIconify
             </h2>
           </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 mb-8">
 
           {/* Applications Section */}
           <motion.div variants={itemVariants} className="gap-8">
@@ -120,22 +120,28 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div>
+          </motion.div>
+            <motion.div variants={itemVariants}>
               <h3 className="text-lg font-semibold mb-4 uppercase text-black dark:text-gray-200">
                 Follow Us
               </h3>
-              <motion.div className="flex space-x-4" variants={itemVariants}>
-                <motion.a
-                  href="#"
-                  aria-label="LinkedIn"
-                  whileHover={{ y: -3 }}
-                  className="hover:text-gray-400 transition-colors dark:text-gray-300 text-sm dark:hover:text-gray-300"
-                >
-                  LinkedIn
-                </motion.a>
-              </motion.div>
-            </div>
-          </motion.div>
+              <ul className="space-y-4">
+                {["LinkedIn", "Github", "Twitter"].map((item) => (
+                  <motion.li
+                    key={item}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <a
+                      href="#"
+                      className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
+                    >
+                      {item}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
         </div>
 
         {/* Divider */}
