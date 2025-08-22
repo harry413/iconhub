@@ -88,7 +88,7 @@ const Home = () => {
           viewport={{ once: true }}
           className="text-3xl font-bold text-center mb-12"
         >
-          Why Choose IconHub?
+          Why Choose HarryIconify?
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -130,7 +130,7 @@ const Home = () => {
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-6 max-w-2xl mx-auto">
-            Join thousands of designers and developers using IconHub for their
+            Join thousands of designers and developers using HarryIconify for their
             projects.
           </p>
           <Link to="/icons" onClick={() => clickSound.play()}>
