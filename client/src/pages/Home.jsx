@@ -7,6 +7,7 @@ import { Button } from '../components/ui/button';
 import { IoDiamond } from "react-icons/io5";
 import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
+import CircularOrbit from "../components/CircularOrbit"
 
 
 const Home = () => {
@@ -74,6 +75,10 @@ const Home = () => {
             </Button>
           </Link>
         </motion.div>
+      </section>
+
+      <section className='w-full py-20 px-8'>
+        <CircularOrbit />
       </section>
 
       <section className="mb-16 mt-28">
