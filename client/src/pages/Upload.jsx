@@ -64,7 +64,7 @@ const Upload = () => {
       form.append('png', formData.pngFile);
 
       const token = localStorage.getItem('token');
-      const response = await fetch(`${BASE_URL}/api/icons`, {
+      const response = await fetch(`${BASE_URL}/api/admin/icons`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`
@@ -114,7 +114,7 @@ const Upload = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 mt-12 mb-8  rounded-l-md rounded-tr-full outline-black bg-transparent border-2 shadow-md shadow-gray-400">
+    <div className="container mx-auto px-4 py-8 mt-12 mb-8  rounded-md outline-black bg-transparent border-2 shadow-md shadow-gray-400">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

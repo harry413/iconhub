@@ -17,8 +17,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Icon Library', path: '/icons' },
-    { name: 'Upload', path: '/upload' },
-    { name: 'favorite', path:'/favorite'}
+    { name: 'Favorite', path:'/favorite'}
   ];
 
   const { logout } = useAuth();

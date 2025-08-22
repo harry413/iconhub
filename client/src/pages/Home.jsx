@@ -37,14 +37,14 @@ const Home = () => {
 
   return (
     <div className="container mx-auto px-4 py-24 ">
-      <section className="text-center mb-20">
+      <section className="text-center my-8 ">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-5xl font-bold mb-6"
         >
           Beautiful Icons for{" "}
-          <span className="text-neutral-700 dark:text-neutral-500">
+          <span className="text-neutral-700 dark:text-neutral-500 underline hover:text-neutral-500">
             Your Projects
           </span>
         </motion.h1>
@@ -68,9 +68,9 @@ const Home = () => {
           <Link to="/icons" onClick={() => clickSound.play()}>
             <Button className="px-4 py-2 cursor-pointer">Browse Icons</Button>
           </Link>
-          <Link to="/upload" onClick={() => clickSound.play()}>
-            <Button variant="outline" className="px-4 py-2  cursor-pointer ">
-              Upload Icons
+          <Link to="/auth" onClick={() => clickSound.play()}>
+            <Button variant="outline" className="px-4 py-2 font-extrabold  cursor-pointer ">
+              Get Start
             </Button>
           </Link>
         </motion.div>

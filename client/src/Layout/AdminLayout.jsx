@@ -35,6 +35,7 @@ const AdminLayout = () => {
     { path: "/admin", label: "Dashboard", icon: <FiHome /> },
     { path: "/admin/users", label: "Users", icon: <FiUsers /> },
     { path: "/admin/icons", label: "Icons", icon: <FiImage /> },
+    { path: "/admin/upload", label: "Upload", icon: <FiImage /> },
     { path: "/admin/analytics", label: "Analytics", icon: <FiPieChart /> },
     { path: "/admin/settings", label: "Settings", icon: <FiSettings /> },
   ];
@@ -115,7 +116,7 @@ const AdminLayout = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", stiffness: 100 }}
-            className={`fixed inset-0 z-40 md:hidden bg-white dark:bg-gray-800 w-64 shadow-lg`}
+            className={`fixed inset-0 z-40 md:hidden bg-white/90 dark:bg-gray-800 w-64 shadow-lg bg-blur` }
           >
             <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
               <h1 className="text-xl font-bold">Admin Panel</h1>

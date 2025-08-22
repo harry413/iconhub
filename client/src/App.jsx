@@ -32,7 +32,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/icons" element={<IconLibrary />} />
             <Route path="/icons/:id" element={<IconDetail />} />
-            <Route path="/upload" element={<Upload />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/settings" element={<UserSetting />} />
             <Route path="/profile" element={<Profile />} />
@@ -45,6 +44,7 @@ function App() {
               }
             >
                 <Route index element={<AdminDashboard />} />
+                <Route path="upload" element={<Upload />} />
                 <Route path="analytics" element={<Analytics />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="users" element={<UserManagement />} />
