@@ -1,4 +1,4 @@
-import { clickSound } from '../utils/Sounds';
+
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import { TiAdjustBrightness } from "react-icons/ti";
@@ -12,7 +12,6 @@ const ThemeToggle = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={() => {
-        clickSound.play();
         toggleTheme();
       }}
       className="p-2 rounded-full"
