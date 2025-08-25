@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import { TiAdjustBrightness } from "react-icons/ti";
