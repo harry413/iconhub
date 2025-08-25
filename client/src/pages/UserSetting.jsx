@@ -9,7 +9,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiSave, FiUpload, FiTrash2 } from 'react-icons/fi';
-import AvatarEditor from 'react-avatar-editor';
+// import AvatarEditor from 'react-avatar-editor';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const UserSetting = () => {
@@ -28,8 +28,8 @@ const UserSetting = () => {
     emailNotifications: true,
     soundEffects: true,
   });
-  const [avatar, setAvatar] = useState(null);
-  const [editor, setEditor] = useState(null);
+  // const [avatar, setAvatar] = useState(null);
+  // const [editor, setEditor] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -67,11 +67,11 @@ const UserSetting = () => {
     }));
   };
 
-  const handleAvatarChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setAvatar(e.target.files[0]);
-    }
-  };
+  // const handleAvatarChange = (e) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setAvatar(e.target.files[0]);
+  //   }
+  // };
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
@@ -176,43 +176,43 @@ const UserSetting = () => {
     }
   };
 
-  const handleSaveAvatar = async () => {
-    if (!editor || !avatar) return;
+  // const handleSaveAvatar = async () => {
+  //   if (!editor || !avatar) return;
 
-    setIsLoading(true);
-    setError('');
+  //   setIsLoading(true);
+  //   setError('');
 
-    try {
-      const canvas = editor.getImageScaledToCanvas();
-      const blob = await new Promise(resolve => canvas.toBlob(resolve));
+  //   try {
+  //     const canvas = editor.getImageScaledToCanvas();
+  //     const blob = await new Promise(resolve => canvas.toBlob(resolve));
       
-      const formData = new FormData();
-      formData.append('avatar', blob, 'avatar.png');
+  //     const formData = new FormData();
+  //     formData.append('avatar', blob, 'avatar.png');
 
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/users/avatar', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      });
+  //     const token = localStorage.getItem('token');
+  //     const response = await fetch('/api/users/avatar', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`
+  //       },
+  //       body: formData
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Failed to update avatar');
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Failed to update avatar');
+  //     }
 
-      const updatedUser = await response.json();
-      updateUser(updatedUser);
-      setAvatar(null);
-      successSound.play();
-    } catch (err) {
-      errorSound.play();
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     const updatedUser = await response.json();
+  //     updateUser(updatedUser);
+  //     setAvatar(null);
+  //     successSound.play();
+  //   } catch (err) {
+  //     errorSound.play();
+  //     setError(err.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const handleDeleteAccount = async () => {
     if (!window.confirm('Are you sure you want to delete your account? This cannot be undone.')) {
@@ -435,7 +435,7 @@ const UserSetting = () => {
           </motion.div>
         </TabsContent>
 
-        //Avatar Tab
+        {/* //Avatar Tab
         <TabsContent value="avatar" className="mt-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -504,7 +504,7 @@ const UserSetting = () => {
               )}
             </div>
           </motion.div>
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
 
       {/* Danger Zone */}
