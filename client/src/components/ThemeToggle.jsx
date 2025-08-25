@@ -1,9 +1,8 @@
-
+import { clickSound } from '../utils/Sounds';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import { TiAdjustBrightness } from "react-icons/ti";
 import { AiFillMoon } from "react-icons/ai";
-import { clickSound } from '../utils/Sounds';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
