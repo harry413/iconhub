@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { clickSound, errorSound, successSound } from '../utils/Sounds';
 import { useNavigate } from 'react-router-dom';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const GoogleLoginButton = () => {
   const buttonRef = useRef(null);
@@ -28,7 +29,7 @@ const GoogleLoginButton = () => {
           ux_mode: 'popup',
           auto_select: false,
         });
-
+          
         // Render button
         window.google.accounts.id.renderButton(
           buttonRef.current,
@@ -51,9 +52,8 @@ const GoogleLoginButton = () => {
     const handleCredentialResponse = async (response) => {
       try {
         clickSound.play();
-        
         // Send credential to your backend
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
+        const res = await fetch(`${BASE_URL}/api/auth/google`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -64,7 +64,6 @@ const GoogleLoginButton = () => {
         if (!res.ok) throw new Error('Google authentication failed');
 
         const { token, user } = await res.json();
-        
         // Login user
         login(token, user);
         successSound.play();

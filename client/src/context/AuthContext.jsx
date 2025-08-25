@@ -1,12 +1,14 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { successSound, errorSound } from '../utils/Sounds';
+import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { successSound, errorSound } from "../utils/Sounds";
+
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext({
   user: null,
   loading: true,
-  login: () => {},
+  loginWithCredentials: async () => {},
+  login: () => {}, // generic login (used by Google too)
   logout: () => {},
 });
 
@@ -15,66 +17,75 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // Check if user is already logged in on page load
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
           setLoading(false);
           return;
         }
 
         const response = await fetch(`${BASE_URL}/api/users/me`, {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         });
-        
+
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
         }
       } catch (err) {
-        console.error('Auth check failed:', err);
+        console.error("Auth check failed:", err);
       } finally {
         setLoading(false);
       }
     };
 
     checkAuth();
-  },[]);
+  }, []);
 
- const login = async (email, password) => {
+  // ✅ For email/password login
+  const loginWithCredentials = async (email, password) => {
     try {
       const response = await fetch(`${BASE_URL}/api/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Login failed");
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
+      // use the generic login after success
+      login(data.token, data.user);
 
-      localStorage.setItem('token', data.token);
-      setUser(data.user);
       successSound.play();
-      navigate('/');
+      navigate("/");
       return { success: true };
     } catch (err) {
+      console.error("Login failed:", err);
       errorSound.play();
       return { success: false, message: err.message };
     }
   };
 
-const logout = () => {
-    localStorage.removeItem('token');
+  // ✅ Generic login (used for Google or credentials)
+  const login = (token, user) => {
+    localStorage.setItem("token", token);
+    setUser(user);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
     setUser(null);
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, loginWithCredentials, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

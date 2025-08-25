@@ -1,48 +1,43 @@
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/user.js";
 import { generateToken } from "../middleware/auth.js";
-import dotenv from "dotenv";
 
-dotenv.config(); 
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-export const googleAuth = (passport) => {
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/api/auth/google/callback",
-        passReqToCallback: true,
-        scope: ["profile", "email"],
-      },
-      async (req, accessToken, refreshToken, profile, done) => {
-        try {
-          const email = profile.emails[0].value;
-          let user = await User.findOne({ email });
+export const googleLogin = async (req, res) => {
+  try {
+    const { credential } = req.body;
+    
+    if (!credential) {
+      return res.status(400).json({ message: "No credential provided" });
+    }
 
-          if (!user) {
-            // Create new user if doesn't exist
-            user = new User({
-              username: profile.displayName,
-              email,
-              googleId: profile.id,
-              isVerified: true,
-              avatar: profile.photos[0]?.value,
-            });
-            await user.save();
-          } else if (!user.googleId) {
-            // Add Google ID to existing user
-            user.googleId = profile.id;
-            user.avatar = profile.photos[0]?.value;
-            await user.save();
-          }
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
 
-          const token = generateToken(user);
-          return done(null, { user, token });
-        } catch (err) {
-          return done(err, null);
-        }
-      }
-    )
-  );
+    const payload = ticket.getPayload();
+    const email = payload.email;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = new User({
+        username: payload.name,
+        email,
+        googleId: payload.sub,
+        avatar: payload.picture,
+        isVerified: true,
+      });
+      await user.save();
+    }
+
+    const token = generateToken(user);
+
+    res.json({ token, user });
+  } catch (err) {
+    console.error("Google auth error:", err);
+    res.status(401).json({ message: "Google authentication failed" });
+  }
 };
