@@ -16,12 +16,17 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://iconhub-mu.vercel.app",          
+];
+
 
 app.use(cookieParser());
 // Allow requests from the client URL and allow credentials
 app.use(cors({
   origin: [function (origin, callback) {
-    if (!origin || origin.endsWith('.vercel.app')) {
+    if (!origin || origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS: ' + origin));

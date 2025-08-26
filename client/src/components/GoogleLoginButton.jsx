@@ -60,7 +60,7 @@ const GoogleLoginButton = () => {
           },
           body: JSON.stringify({ credential: response.credential }),
         });
-
+         
         if (!res.ok) throw new Error('Google authentication failed');
 
         const { token, user } = await res.json();

@@ -72,9 +72,7 @@ export const AuthProvider = ({ children }) => {
 
   // ✅ Generic login (used for Google or credentials)
   const login = (token, user) => {
-    console.log(token)
     localStorage.setItem("token", token);
-    console.log(user)
     setUser(user);
   };
 
