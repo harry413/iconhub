@@ -9,6 +9,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
+
 // Configure multer for avatar uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -333,8 +334,10 @@ router.get('/favorites', authenticate, async (req, res) => {
     const user = await User.findById(req.user.userId)
       .populate('favorites')
       .select('favorites');
+      
     res.json(user.favorites);
   } catch (err) {
+    
     res.status(500).json({ message: err.message });
   }
 });
