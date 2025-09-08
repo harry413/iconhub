@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { hoverSound, clickSound} from '../utils/Sounds';
 import { FiDownload } from 'react-icons/fi';
 import { TiHeart } from "react-icons/ti";
-const BASE_URL = import.meta.env.VITE_API_URL;
 
 const IconCard = ({ icon, onFavorite, onClick, onDownload }) => {
+
   
   return (
     <motion.div
@@ -38,7 +38,6 @@ const IconCard = ({ icon, onFavorite, onClick, onDownload }) => {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={onFavorite}
-           
             className={`p-2 rounded-full` }
           >
             <TiHeart  />

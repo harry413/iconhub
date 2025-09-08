@@ -18,6 +18,7 @@ const IconLibrary = () => {
 
 const handleIconClick = (id) => {
   navigate(`/icons/${id}`);
+
 };
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const handleIconClick = (id) => {
         setIsLoading(false);
       }
     };
+   
 
     fetchIcons();
   }, []);
@@ -88,6 +90,7 @@ const handleIconClick = (id) => {
       } else {
         updated = [...prev, icon];
       }
+
       localStorage.setItem('favorites', JSON.stringify(updated));
       return updated;
     });
