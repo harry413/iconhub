@@ -22,9 +22,10 @@ const Navbar = () => {
 
   const { logout } = useAuth();
   return (
+    <div class="relative mb-20">
     <nav
-      className={`py-4 px-6  ${
-        theme === "dark" ? "bg-transparent" : "bg-transparent"
+      className={`py-4 px-6 fixed top-0 right-0 left-0 z-50 ${
+        theme === "dark" ? "bg-transparent bg-black/30 backdrop-blur-md shadow-lg" : "bg-transparent bg-white/30 backdrop-blur-md shadow-lg"
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
@@ -44,15 +45,9 @@ const Navbar = () => {
           >
             HarryIconify
           </span>
-          {/* <motion.span
-            animate={{ rotate: [0, 15, -15, 0] }}
-            transition={{ duration: 0.5 }}
-          >
-            🎨
-          </motion.span> */}
         </Link>
 
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-6 ">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -181,6 +176,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </nav>
+    </div>
   );
 };
 

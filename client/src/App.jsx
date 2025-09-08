@@ -27,7 +27,7 @@ function App() {
     <ThemeProvider>
       
       <Background />
-      <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
+      <div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
