@@ -27,18 +27,22 @@ const IconCard = ({ icon, onFavorite, onClick, onDownload }) => {
         <div className="flex space-x-2 mt-auto">
           <motion.button
             whileTap={{ scale: 0.9 }}
-            onClick={() => {
-              clickSound.play();
-              onDownload;
-            }}
-            className="p-2 rounded-full bg-blue-500 text-white"
+          onClick={(e) => {
+            e.stopPropagation();
+            clickSound.play();
+            onDownload();
+          }}
+          className="p-2 rounded-full bg-blue-500 text-white"
           >
             <FiDownload />
           </motion.button>
           <motion.button
+            onClick={(e) => {
+              e.stopPropagation();
+              onFavorite();
+            }}
             whileTap={{ scale: 0.9 }}
-            onClick={onFavorite}
-            className={`p-2 rounded-full` }
+            className={`p-2 rounded-full bg-gray-500` }
           >
             <TiHeart  />
           </motion.button>

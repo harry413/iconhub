@@ -18,7 +18,7 @@ const IconLibrary = () => {
 
 const handleIconClick = (id) => {
   navigate(`/icons/${id}`);
-
+    
 };
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const handleIconClick = (id) => {
 
   const handleDownload = (icon) => {
     // Create a temporary link to download the SVG/icon file
+    console.error("Icon or SVG data is missing:", icon);
     const svgData = icon.svg; // assuming icon.svg contains SVG markup as string
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);

@@ -24,7 +24,6 @@ const IconDetail = () => {
         
         const data = await response.json();
 
-
         if (!response.ok) {
           throw new Error(data.message || 'Failed to fetch icon');
         }
@@ -33,12 +32,20 @@ const IconDetail = () => {
         
     // Check if icon is in favorites (would need to implement this)
         const token = localStorage.getItem('token');
+        
         if (token) {
           const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
-            headers: { Authorization: `Bearer ${token}` }
+             method: 'GET',
+            headers: { Authorization: `Bearer ${token}`}
           });
+          
           const userData = await favResponse.json();
-          setIsFavorite(userData.favorites.includes(id));
+          
+          if (Array.isArray(userData.favorites)) {
+            setIsFavorite(userData.favorites.includes(id));
+          } else {
+            setIsFavorite(false);
+          }
         }
         
         successSound.play();

@@ -8,6 +8,7 @@ import {authenticate} from "../middleware/auth.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { log } from "console";
 
 
 // Configure multer for avatar uploads
@@ -273,6 +274,8 @@ router.post('/login', async (req, res) => {
 router.get('/me', authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
+    console.log(user);
+    
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -321,7 +324,6 @@ router.delete('/favorites/:iconId', authenticate, async (req, res) => {
     );
     
     await user.save();
-
     res.json({ message: 'Icon removed from favorites', favorites: user.favorites });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -337,7 +339,6 @@ router.get('/favorites', authenticate, async (req, res) => {
       
     res.json(user.favorites);
   } catch (err) {
-    
     res.status(500).json({ message: err.message });
   }
 });
