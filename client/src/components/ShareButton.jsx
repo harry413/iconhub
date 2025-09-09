@@ -71,7 +71,7 @@ const ShareButton = ({ icon }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="absolute right-0 mt-2 w-64 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-10"
+          className="absolute left-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-20"
         >
           <h4 className="font-medium mb-3">Share this icon</h4>
 

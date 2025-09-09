@@ -31,22 +31,22 @@ const IconDetail = () => {
         setIcon(data);
         
     // Check if icon is in favorites (would need to implement this)
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
         
-        if (token) {
-          const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
-             method: 'GET',
-            headers: { Authorization: `Bearer ${token}`}
-          });
+        // if (token) {
+        //   const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
+        //      method: 'GET',
+        //     headers: { Authorization: `Bearer ${token}`}
+        //   });
           
-          const userData = await favResponse.json();
+        //   const userData = await favResponse.json();
           
-          if (Array.isArray(userData.favorites)) {
-            setIsFavorite(userData.favorites.includes(id));
-          } else {
-            setIsFavorite(false);
-          }
-        }
+        //   if (Array.isArray(userData.favorites)) {
+        //     setIsFavorite(userData.favorites.includes(id));
+        //   } else {
+        //     setIsFavorite(false);
+        //   }
+        // }
         
         successSound.play();
       } catch (err) {

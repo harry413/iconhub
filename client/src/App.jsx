@@ -1,3 +1,4 @@
+import {useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,17 +19,23 @@ import Analytics from "./pages/Analytics"
 import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
 import UserSetting from "./pages/UserSetting"
-import Background from './components/Bg'
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen from './components/LoadingScreen';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <ThemeProvider>
-      
-      <Background />
-      <div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
-        <Navbar />
+    <ThemeProvider> 
+         {loading && <LoadingScreen />}
+      {!loading && (<div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
+          <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -57,6 +64,7 @@ function App() {
         </AnimatePresence>
         <Footer />
       </div>
+        )}
     </ThemeProvider>
   );
 }

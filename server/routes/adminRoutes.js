@@ -10,8 +10,6 @@ router.get("/users", authenticate, adminOnly, async (req, res) => {
     const users = await User.find().select("username");
     res.json(users);
   } catch (err) {
-    console.log(err);
-
     res.status(500).json({ message: err.message });
   }
 });
