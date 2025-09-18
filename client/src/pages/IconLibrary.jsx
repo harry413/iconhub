@@ -148,7 +148,7 @@ const handleIconClick = (id) => {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-6">
           {filteredIcons.map(icon => (
             <IconCard
               key={icon._id}

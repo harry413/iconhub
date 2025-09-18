@@ -38,8 +38,9 @@ const Home = () => {
 
   return (
     <div className="container mx-auto px-4 py-24 ">
-      <section className="text-center my-8 ">
-        <motion.h1
+      <section className="flex px-6 flex-col md:flex-row items-center justify-center gap-12 w-full">
+       <div className="flex flex-col items-start justify-center text-center md:text-left md:w-1/2">
+         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-5xl font-bold mb-6"
@@ -54,7 +55,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-xl mb-8 max-w-2xl mx-auto"
+          className="text-xl mb-8  mx-auto"
         >
           Discover thousands of free icons in various styles and formats.
           Perfect for designers, developers, and creators.
@@ -64,10 +65,15 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex justify-center gap-4"
+          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2"
         >
+          
           <Link to="/icons" onClick={() => clickSound.play()}>
-            <Button className="px-4 py-2 cursor-pointer">Browse Icons</Button>
+            <input
+            type="text"
+            placeholder="Search icons..."
+            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+          />
           </Link>
           <Link to="/auth" onClick={() => clickSound.play()}>
             <Button variant="outline" className="px-4 py-2 font-extrabold  cursor-pointer ">
@@ -75,6 +81,26 @@ const Home = () => {
             </Button>
           </Link>
         </motion.div>
+       </div>
+       <motion.div className="flex items-start justify-center md:w-1/2"
+        initial={{ opacity: 0, y: -50, x: -50, scale: 0.5, z:-50 }}
+        animate={{ opacity: 1, y: 0, x: 0, scale: 1.0 , z:0 }}
+        transition={{ delay: 0.2, duration: Infinity, type: "spring", stiffness: 50, damping: 20 }}
+        onMouseEnter={() => hoverSound.play()}
+       >
+        {theme === "dark" ? (
+          <img
+          src="/hero.png"
+          alt="Hero"
+          className="mx-auto mt-12 w-full max-w-lg rounded-lg"
+        />):(
+          <img
+          src="/hero1.png"
+          alt="Hero"
+          className="mx-auto mt-12 w-full max-w-lg rounded-lg"
+        />
+        )}
+       </motion.div>
       </section>
 
       <section className='w-full py-20 px-8'>

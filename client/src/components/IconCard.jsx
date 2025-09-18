@@ -16,37 +16,13 @@ const IconCard = ({ icon, onFavorite, onClick, onDownload }) => {
       whileHover={{ scale: 1.05 }}
       onClick={onClick}
       onMouseEnter={() => hoverSound.play()}
-      className="rounded-lg overflow-hidden shadow-md bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600"
+      className="rounded-lg overflow-hidden cursor-pointer  bg-transparent"
     >
-      <div className="p-4 flex flex-col items-center">
+      <div className="p-2 flex flex-col items-center">
         <div
-          className="w-16 h-16 mb-4 flex items-center justify-center "
+          className="w-10 h-10 mb-4 flex items-center justify-center bg-gray-800 dark:bg-gray-500 rounded text-gray-900 dark:text-gray-800"
           dangerouslySetInnerHTML={{ __html: icon.svg }}
         />
-        <h3 className="text-xsm font-medium text-center mb-2 text-white">{icon.name}</h3>
-        <div className="flex space-x-2 mt-auto">
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-          onClick={(e) => {
-            e.stopPropagation();
-            clickSound.play();
-            onDownload();
-          }}
-          className="p-2 rounded-full bg-blue-500 text-white"
-          >
-            <FiDownload />
-          </motion.button>
-          <motion.button
-            onClick={(e) => {
-              e.stopPropagation();
-              onFavorite();
-            }}
-            whileTap={{ scale: 0.9 }}
-            className={`p-2 rounded-full bg-gray-500` }
-          >
-            <TiHeart  />
-          </motion.button>
-        </div>
       </div>
     </motion.div>
   );

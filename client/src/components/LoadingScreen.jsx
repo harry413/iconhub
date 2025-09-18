@@ -24,7 +24,10 @@ export default function LoadingScreen() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="w-40 h-40 md:w-56 md:h-56 absolute text-blue text-2xl md:text-4xl font-bold flex flex-col items-center justify-center bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18] rounded-full"
+        className="w-40 h-40 md:w-56 md:h-56 absolute text-blue text-2xl md:text-4xl 
+        shadow-lg shadow-gray-900 dark:shadow-gray-200
+        font-bold flex flex-col items-center justify-center bg-gradient-to-r from-[#abbaab] 
+        to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18] rounded-full"
       >
         <img
           src="/hilogo.png"
