@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { hoverSound, clickSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { IoDiamond } from "react-icons/io5";
+import { FiCopy } from "react-icons/fi";
 import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
@@ -81,6 +82,17 @@ const Home = () => {
             </Button>
           </Link>
         </motion.div>
+         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2"
+        >
+           <div className='px-4 py-2 flex items-between justify-center'>
+             <h5 className='text-blue-800 font-bold'>npm i @harry413/icons </h5>
+             <FiCopy/>
+           </div>
+           </motion.div>
        </div>
        <motion.div className="flex items-start justify-center md:w-1/2"
         initial={{ opacity: 0, y: -50, x: -50, scale: 0.5, z:-50 }}
