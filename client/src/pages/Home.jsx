@@ -68,6 +68,10 @@ const Home = () => {
           transition={{ delay: 0.4 }}
           className="flex flex-col items-center justify-center md:gap-8 gap-2"
         >
+          <div className='px-4 py-2 flex items-center justify-center border-2 rounded-md border-gray-400 gap-2'>
+             <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
+             <FiCopy className='flex items-center'/>
+           </div>
           
           <Link to="/icons" onClick={() => clickSound.play()}>
             <input
@@ -76,10 +80,6 @@ const Home = () => {
             className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
           />
           </Link>
-          <div className='px-4 py-2 flex items-center justify-center border-2 rounded-md border-gray-400 gap-2'>
-             <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
-             <FiCopy className='flex items-center'/>
-           </div>
         </motion.div>
        </div>
        <motion.div className="flex items-start justify-center md:w-1/2"
