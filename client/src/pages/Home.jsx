@@ -76,23 +76,11 @@ const Home = () => {
             className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
           />
           </Link>
-          <Link to="/auth" onClick={() => clickSound.play()}>
-            <Button variant="outline" className="px-4 py-2 font-extrabold  cursor-pointer ">
-              Get Start
-            </Button>
-          </Link>
-        </motion.div>
-         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
-          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2 p-2"
-        >
-           <div className='px-4 py-2 flex items-between justify-center border-2 rounded-md border-gray-400'>
+          <div className='px-4 py-2 flex items-center justify-center border-2 rounded-md border-gray-400 gap-2'>
              <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
              <FiCopy className='flex items-center'/>
            </div>
-           </motion.div>
+        </motion.div>
        </div>
        <motion.div className="flex items-start justify-center md:w-1/2"
         initial={{ opacity: 0, y: -50, x: -50, scale: 0.5, z:-50 }}
