@@ -66,7 +66,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2"
+          className="flex flex-col items-center justify-center md:gap-8 gap-2"
         >
           
           <Link to="/icons" onClick={() => clickSound.play()}>
