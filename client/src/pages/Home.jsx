@@ -86,11 +86,11 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4 }}
-          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2"
+          className="flex flex-col md:flex-row items-end md:items-center justify-center md:gap-8 gap-2 p-2"
         >
-           <div className='px-4 py-2 flex items-between justify-center'>
-             <h5 className='text-blue-800 font-bold'>npm i @harry413/icons </h5>
-             <FiCopy/>
+           <div className='px-4 py-2 flex items-between justify-center border-2 rounded-md border-gray-400'>
+             <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
+             <FiCopy className='flex items-center'/>
            </div>
            </motion.div>
        </div>
