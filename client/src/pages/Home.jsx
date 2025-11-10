@@ -15,7 +15,17 @@ import CircularOrbit from "../components/CircularOrbit"
  
  const Home = () => {
    const { theme } = useTheme();
-   const notify = () => toast("Copy to clipboard!");
+   const notify = () => toast('Copied to clipboard!', {
+     position: "top-right",
+     autoClose: 2000,
+     hideProgressBar: true,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: theme === "dark" ? "light" : "dark",
+    
+    });
 
   const features = [
     {
@@ -88,7 +98,7 @@ import CircularOrbit from "../components/CircularOrbit"
           <div className='px-4 py-2 flex items-center justify-center border-2 rounded-lg border-gray-400 gap-2'>
              <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
              <FiCopy className='flex items-center cursor-pointer' onClick={handleCopy}/>
-             <ToastContainer position="top-right" autoClose={2000} hideProgressBar={true}  />
+             <ToastContainer />
            </div>
         </motion.div>
        </div>
