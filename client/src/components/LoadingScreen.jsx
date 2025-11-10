@@ -23,7 +23,7 @@ export default function LoadingScreen() {
           duration: 0.8,
           delay: 0.5,
           ease: [0, 0.71, 0.2, 1.01],
-        approach: { type: "spring", stiffness: 100, damping: 20},
+        approach: { type: "spring", stiffness: 300, damping: 20},
         }}
         className="w-40 h-40 md:w-56 md:h-56 flex flex-col items-center justify-center"
       >
@@ -36,13 +36,13 @@ export default function LoadingScreen() {
         />
         <motion.span
             initial={{  opacity: 0, x: 100 }}
-
-        animate={{  opacity:[0, 0.5, 0.8, 1], x: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 1.5,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
+            animate={{  opacity:[0, 0.5, 0.8, 1], x: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: 1.5,
+              ease: [0, 0.71, 0.2, 1.01],
+              approach: { type: "spring", stiffness: 300, damping: 20},
+            }}
             className={`hidden md:flex mr-2 text-3xl font-bold text-transparent bg-clip-text ${
               theme === "dark"
                 ? "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"
