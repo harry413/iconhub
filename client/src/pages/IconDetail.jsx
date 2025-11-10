@@ -173,6 +173,8 @@ const IconDetail = () => {
               <div
                 className="w-full h-64 flex items-center justify-center"
                 dangerouslySetInnerHTML={{ __html: icon.svg }}
+                height={256}
+                width={256}
               />
             </motion.div>
 
