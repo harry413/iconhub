@@ -10,9 +10,12 @@ import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
 
-
-const Home = () => {
-  const { theme } = useTheme();
+ import { ToastContainer, toast } from 'react-toastify'
+ 
+ 
+ const Home = () => {
+   const { theme } = useTheme();
+   const notify = () => toast("Copy to clipboard!");
 
   const features = [
     {
@@ -36,6 +39,12 @@ const Home = () => {
       icon: <IoDiamond />
     }
   ];
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText('npm i @harry413/icons');
+    notify();
+    clickSound.play();
+  }
 
   return (
     <div className="container mx-auto px-4 py-24 ">
@@ -66,12 +75,8 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-col items-center justify-center md:gap-8 gap-2"
+          className="flex flex-col lg:flex-row items-center justify-center md:gap-8 gap-2"
         >
-          <div className='px-4 py-2 flex items-center justify-center border-2 rounded-lg border-gray-400 gap-2'>
-             <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
-             <FiCopy className='flex items-center'/>
-           </div>
           
           <Link to="/icons" onClick={() => clickSound.play()}>
             <input
@@ -80,12 +85,17 @@ const Home = () => {
             className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
           />
           </Link>
+          <div className='px-4 py-2 flex items-center justify-center border-2 rounded-lg border-gray-400 gap-2'>
+             <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
+             <FiCopy className='flex items-center cursor-pointer' onClick={handleCopy}/>
+             <ToastContainer position="top-right" autoClose={2000} hideProgressBar={true}  />
+           </div>
         </motion.div>
        </div>
        <motion.div className="flex items-start justify-center md:w-1/2"
         initial={{ opacity: 0, y: -50, x: -50, scale: 0.5, z:-50 }}
         animate={{ opacity: 1, y: 0, x: 0, scale: 1.0 , z:0 }}
-        transition={{ delay: 0.2, duration: Infinity, type: "spring", stiffness: 50, damping: 20 }}
+        transition={{ delay: 0.2, duration: Infinity, type: "spring", stiffness: 50, damping: 60 }}
         onMouseEnter={() => hoverSound.play()}
        >
         {theme === "dark" ? (
