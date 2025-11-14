@@ -24,6 +24,8 @@ const ShareButton = ({ icon }) => {
     toast.success("Link copied to clipboard!");
   };
 
+
+  
   const shareOnSocial = (platform) => {
     clickSound.play();
     let url = "";
@@ -71,7 +73,7 @@ const ShareButton = ({ icon }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-20"
+          className="absolute left-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50"
         >
           <h4 className="font-medium mb-3">Share this icon</h4>
 
@@ -101,7 +103,6 @@ const ShareButton = ({ icon }) => {
               <FaLinkedin className="text-blue-700" />
             </Button>
           </div>
-
           <div className="flex items-center gap-2">
             <Input value={shareUrl} readOnly className="flex-1 text-sm" />
             <Button

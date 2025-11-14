@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const { logout } = useAuth();
   return (
-    <div className="relative mb-20">
+    <div className="relative mb-10">
     <nav
       className={`py-4 px-6 fixed top-0 right-0 left-0 z-50 ${
         theme === "dark" ? "bg-transparent bg-black/30 backdrop-blur-md shadow-lg" : "bg-transparent bg-white/30 backdrop-blur-md shadow-lg"
@@ -37,7 +37,7 @@ const Navbar = () => {
         >
           <img src="/hilogo.png" alt="logo" className=" h-10 w-8 text-center mr-4"/>
           <span
-            className={`hidden md:flex mr-2 text-2xl font-bold text-transparent bg-clip-text ${
+            className={`hidden md:flex mr-2 text-2xl font-extrabold  text-transparent bg-clip-text ${
               theme === "dark"
                 ? "bg-gradient-to-r from-[#abbaab] to-[#ffffff]"
                 : "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"
@@ -47,12 +47,12 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center space-x-6 ">
+        <div className="hidden md:flex items-center space-x-6 font-bold">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className="hover:text-gray-700 dark:hover:text-gray-400 transition-colors"
+              className=" text-[#2f4f4f] dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 transition-colors"
               onMouseEnter={() => hoverSound.play()}
               onClick={() => clickSound.play()}
             >
@@ -70,7 +70,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <Link
                 to="/auth"
-                className="hover:text-gray-700 dark:hover:text-gray-400 transition-colors"
+                className="text-[#2f4f4f] dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 transition-colors"
                 onMouseEnter={() => hoverSound.play()}
                 onClick={() => clickSound.play()}
               >
@@ -107,7 +107,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                  className="block px-4 py-2 text-[#2f4f4f] dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                   onClick={() => {
                     clickSound.play();
                     setIsOpen(false);
@@ -157,7 +157,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to="/auth"
-                    className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                    className="text-[#2f4f4f] dark:text-gray-200 block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                     onClick={() => {
                       clickSound.play();
                       setIsOpen(false);

@@ -20,6 +20,8 @@ import UserManagement from "./pages/UserManagement"
 import IconManagement from "./pages/IconManagement"
 import UserSetting from "./pages/UserSetting"
 import LoadingScreen from './components/LoadingScreen';
+import Career from './pages/Career';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -27,14 +29,15 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <ThemeProvider> 
          {loading && <LoadingScreen />}
-      {!loading && (<div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
+      {!loading && (
+        <div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
           <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
@@ -44,6 +47,8 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/settings" element={<UserSetting />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/career" element={<Career/>}/>
+            <Route path="/contactus" element={<ContactUs/>}/>
             <Route
               path="/admin/*"
               element={

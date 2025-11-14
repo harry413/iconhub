@@ -65,7 +65,7 @@ const IconDetail = () => {
     if (!icon) return;
     
     const link = document.createElement('a');
-    link.href = format === 'svg' ? icon.svg : icon.png;
+    link.href = format === 'svg' ? icon.svg : icon.tsx;
     link.download = `${icon.name}.${format}`;
     document.body.appendChild(link);
     link.click();
@@ -214,6 +214,12 @@ const IconDetail = () => {
                   className="flex items-center"
                 >
                   <FiDownload className="mr-2" /> Download PNG
+                </Button>
+                <Button
+                  onClick={() => handleDownload("tsx")}
+                  className="flex items-center"
+                >
+                  <FiDownload className="mr-2" /> Download Animated
                 </Button>
                 <Button
                   variant={isFavorite ? "default" : "outline"}

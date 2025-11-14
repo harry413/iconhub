@@ -11,6 +11,7 @@ import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
 
  import { ToastContainer, toast } from 'react-toastify'
+import ClientTestimonial from "../components/Client";
  
  
  const Home = () => {
@@ -24,7 +25,6 @@ import CircularOrbit from "../components/CircularOrbit"
      draggable: true,
      progress: undefined,
      theme: theme === "dark" ? "light" : "dark",
-    
     });
 
   const features = [
@@ -63,7 +63,7 @@ import CircularOrbit from "../components/CircularOrbit"
          <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold mb-6"
+          className="text-4xl md:text-5xl font-bold mb-6 text-[#2f4f4f] dark:text-[#d3d3d3]"
         >
           Beautiful Icons for{" "}
           <span className="text-neutral-700 dark:text-neutral-500 underline hover:text-neutral-500">
@@ -90,10 +90,10 @@ import CircularOrbit from "../components/CircularOrbit"
           
           <Link to="/icons" onClick={() => clickSound.play()}>
             <input
-            type="text"
-            placeholder="Search icons..."
-            className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-          />
+              type="text"
+              placeholder="Search icons..."
+              className="px-4 py-2 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+            />
           </Link>
           <div className='px-4 py-2 flex items-center justify-center border-2 rounded-lg border-gray-400 gap-2'>
              <h5 className='text-black-800 font-bold'>npm i @harry413/icons </h5>
@@ -103,9 +103,9 @@ import CircularOrbit from "../components/CircularOrbit"
         </motion.div>
        </div>
        <motion.div className="flex items-start justify-center md:w-1/2"
-        initial={{ opacity: 0, y: -50, x: -50, scale: 0.5, z:-50 }}
-        animate={{ opacity: 1, y: 0, x: 0, scale: 1.0 , z:0 }}
-        transition={{ delay: 0.2, duration: Infinity, type: "spring", stiffness: 50, damping: 60 }}
+        initial={{ opacity: 0, y: -50, x: -50, scale: 0.5 }}
+        animate={{ opacity: 1, y: 0, x: 0, scale: 1.0  }}
+        transition={{ delay: 0.2, duration: Infinity, type: "spring", stiffness: 50, damping: 10 }}
         onMouseEnter={() => hoverSound.play()}
        >
         {theme === "dark" ? (
@@ -161,7 +161,8 @@ import CircularOrbit from "../components/CircularOrbit"
           ))}
         </div>
       </section>
-
+          
+        <ClientTestimonial/>
       <section className="text-center">
         <motion.div
           initial={{ opacity: 0 }}

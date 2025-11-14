@@ -10,20 +10,20 @@ export default function LoadingScreen() {
         className="absolute inset-0 -z-10"
         initial={{ background: "linear-gradient(45deg,#8e9eab,#eef2f3)" }}
         transition={{
-          duration: 6,
+          duration: 1,
           repeat: Infinity,
           ease: "linear",
         }}
       />
-      {/* Spinning text around the logo */}
+      
       <motion.div
-        initial={{  opacity: 0, x: -100 }}
-        animate={{  opacity:1 , x: 0 }}
+        initial={{ opacity: 0, x: -100}}
+        animate={{ opacity:1 , x: 0,  rotate: 360  }}
         transition={{
-          duration: 0.8,
+          duration: 1.5,
           delay: 0.5,
           ease: [0, 0.71, 0.2, 1.01],
-        approach: { type: "spring", stiffness: 300, damping: 20},
+        approach: { type: "spring", stiffness: 300, damping: 10},
         }}
         className="w-40 h-40 md:w-56 md:h-56 flex flex-col items-center justify-center"
       >
@@ -35,15 +35,15 @@ export default function LoadingScreen() {
           
         />
         <motion.span
-            initial={{  opacity: 0, x: 100 }}
+            initial={{  opacity: 0, x: 100}}
             animate={{  opacity:[0, 0.5, 0.8, 1], x: 0 }}
             transition={{
               duration: 0.5,
-              delay: 1.5,
+              delay: 1.0,
               ease: [0, 0.71, 0.2, 1.01],
-              approach: { type: "spring", stiffness: 300, damping: 20},
+              approach: { type: "spring", stiffness: 300, damping: 10},
             }}
-            className={`hidden md:flex mr-2 text-3xl font-bold text-transparent bg-clip-text ${
+            className={`mr-2 text-md md:text-3xl font-extrabold text-transparent bg-clip-text ${
               theme === "dark"
                 ? "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"
                 : "bg-gradient-to-r from-[#8e0e00] to-[#1f1c18]"

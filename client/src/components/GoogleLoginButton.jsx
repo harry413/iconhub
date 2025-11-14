@@ -38,9 +38,9 @@ const GoogleLoginButton = () => {
             theme: 'outline',
             size: 'large',
             text: 'continue_with',
-            shape: 'rectangular',
+            shape: 'circular',
             logo_alignment: 'right',
-            width: '300px',
+            width: '250px',
           }
         );
 

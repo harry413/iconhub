@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import path from "path";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const footerVariants = {
@@ -33,7 +35,7 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="flex flex-col items-center justify-center">
             <img src="/hilogo.png" alt="logo" className=" h-16 w-12 md:h-30 md:w-24 text-center"/>
             
-            <h2 className="text-2xl font-bold mb-4 dark:text-gray-200">
+            <h2 className="text-2xl font-extrabold mb-4 dark:text-gray-200 ">
               HarryIconify
             </h2>
           </motion.div>
@@ -56,12 +58,12 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="hover:text-gray-500 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                   >
                     {item}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -85,12 +87,12 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                   >
                     {item}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -103,17 +105,17 @@ const Footer = () => {
                 More
               </h3>
               <ul className="space-y-4">
-                {["Contact Us", "Careers"].map((item) => (
+                {[{id:1,name:"Contact Us", path:"/contactUs"}, {id:2,name:"Careers", path:'/career'}].map((item) => (
                   <motion.li
-                    key={item}
+                    key={item.name}
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <a
-                      href="#"
+                      href={item.path}
                       className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                     >
-                      {item}
+                      {item.name}
                     </a>
                   </motion.li>
                 ))}
@@ -126,18 +128,22 @@ const Footer = () => {
                 Follow Us
               </h3>
               <ul className="space-y-4">
-                {["LinkedIn", "Github", "Twitter"].map((item) => (
+                {[
+                  {id:1, name:"LinkedIn", path:''}, 
+                  {id:2, name:"Github", path:""}, 
+                  {id:3, name:"Twitter", path:''}
+                ].map((item) => (
                   <motion.li
-                    key={item}
+                    key={item.id}
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <a
-                      href="#"
+                    <Link
+                      to={item.path}
                       className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                     >
-                      {item}
-                    </a>
+                      {item.name}
+                    </Link>
                   </motion.li>
                 ))}
               </ul>

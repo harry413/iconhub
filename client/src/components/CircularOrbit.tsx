@@ -6,15 +6,15 @@ import { Sun, Moon, Star, Cloud, Leaf, Sparkles } from "lucide-react";
 import React from "react";
 
 const orbitConfigs = [
-  { radius: 100, duration: 20, icons: [Sun, Moon] },
-  { radius: 180, duration: 30, icons: [Star, Cloud, Leaf] },
-  { radius: 250, duration: 40, icons: [Sparkles, Star, Moon, Leaf] },
+  { radius: 100, duration: 20, icons: [Sun, Moon, Star, Leaf, Sparkles] },
+  { radius: 180, duration: 30, icons: [Star, Cloud, Leaf, Sparkles, Moon] },
+  { radius: 250, duration: 40, icons: [Sparkles, Star, Moon, Leaf, Leaf] },
 ];
 
 const CircularOrbit = () => {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen text-black dark:text-white overflow-hidden mask-b-from-20% mask-b-to-90%">
-      {/* Circles with rotating icons */}
+      
       {orbitConfigs.map((orbit, idx) => (
         <motion.div
           key={idx}
@@ -60,7 +60,7 @@ const CircularOrbit = () => {
 
       {/* Center Text */}
       <div className="relative z-30 text-center mt-10">
-        <h1 className="text-5xl font-bold">Animated Icons</h1>
+        <h1 className="text-2xl md:text-5xl font-bold text-[#111111] dark:text-[#d3d3d3]">Animated Icons</h1>
         <p className="text-black dark:text-gray-200 mt-4 max-w-lg">
           Go through our bunddle of animated SVG icons To make your application more intractive.
         </p>

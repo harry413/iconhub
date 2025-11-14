@@ -88,7 +88,7 @@ const Auth = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`z-50 w-full max-w-md p-8 md:px-24 md:py-28 md:rounded-full shadow-2xl md:border-2   ${
+        className={` w-full max-w-md p-8 md:px-24 md:py-28 md:rounded-full shadow-2xl md:border-2   ${
           theme === "dark"
           ? " bg-transparent outline md:border-white shadow-white"
           : "bg-transparent md:border-black shadow-black"
@@ -137,7 +137,7 @@ const Auth = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className=""
+              className="border border-gray-700"
               placeholder="Please enter a valid email address"
             />
           </div>
@@ -154,7 +154,7 @@ const Auth = () => {
               onChange={handleChange}
               required
               minLength="6"
-              className=""
+              className="border border-gray-700"
               placeholder="Password must be at least 6 characters long"
             />
           </div>
@@ -200,9 +200,9 @@ const Auth = () => {
 
         <div className="space-y-4">
           <div className="flex items-center my-4">
-            <div className="flex-grow border-t border-gray-300"></div>
+            <div className="flex-grow border-t border-gray-900 dark:border-gray-700"></div>
             <span className="mx-4 text-gray-500">or</span>
-            <div className="flex-grow border-t border-gray-300"></div>
+            <div className="flex-grow border-t border-gray-900 dark:border-gray-700"></div>
           </div>
           <GoogleLoginButton
             onSuccess={handleGoogleSuccess}

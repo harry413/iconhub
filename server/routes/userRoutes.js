@@ -196,7 +196,7 @@ router.post('/register', async (req, res) => {
     function sendVerificationEmail(email, token) {
       // In production, use nodemailer or similar to send real emails.
       // Here, just log the verification link for demonstration.
-      const verificationUrl = `${process.env.FRONTEND_URL || "http://localhost:5173"}/verify-email?token=${token}`;
+      const verificationUrl = `${process.env.CLIENT_URL || "http://localhost:5173"}/verify-email?token=${token}`;
       console.log(`Send verification email to ${email}: ${verificationUrl}`);
     }
 
