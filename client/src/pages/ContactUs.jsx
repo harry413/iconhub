@@ -21,6 +21,7 @@ const ContactUs = () => {
     e.preventDefault();
     // Handle form submission here
     console.log('Form submitted:', formData);
+    
   };
 
   const containerVariants = {
