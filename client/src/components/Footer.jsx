@@ -76,14 +76,14 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               {[
-                "Who We Are",
-                "Global Competency",
-                "Our License",
-                "Blog",
-                "Whats new"
+                {id:1, name:"Who We Are", path:""},
+                {id:2, name:"Global Competency", path:""},
+                {id:3, name:"Our License", path:""},
+                {id:4, name:"Blog", path:""},
+                {id:5, name:"Whats new", path:""}
               ].map((item) => (
                 <motion.li
-                  key={item}
+                  key={item.id}
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -91,7 +91,7 @@ const Footer = () => {
                     to="#"
                     className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
