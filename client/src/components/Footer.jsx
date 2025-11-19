@@ -111,12 +111,12 @@ const Footer = () => {
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <a
-                      href={item.path}
+                    <Link
+                      to={item.path}
                       className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
