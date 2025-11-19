@@ -105,7 +105,7 @@ const Footer = () => {
                 More
               </h3>
               <ul className="space-y-4">
-                {[{id:1,name:"Contact Us", path:"/contactUs"}, {id:2,name:"Careers", path:'/career'}].map((item) => (
+                {[{id:1,name:"Contact Us", path:"/contactus"}, {id:2,name:"Career", path:'/career'}].map((item) => (
                   <motion.li
                     key={item.name}
                     whileHover={{ x: 5 }}
