@@ -28,7 +28,7 @@ const Footer = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       variants={footerVariants}
-      className="bg-gradient-to-r  dark:from-slate-900 dark:to-slate-500 from-gray-300 to-gray-200 text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
+      className="bg-gradient-to-r dark:from-slate-900 dark:to-slate-500 from-gray-300 to-gray-200 text-gray-600 dark-text-gray-200 py-12 px-4 bottom-0 left-0 right-0"
     >
       <div className="container mx-auto ">
           {/* Logo Section */}
@@ -48,21 +48,21 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               {[
-                "Authors",
-                "Icons",
-                "Animated icons",
-                "Icon tags",
+                {id:1, name:"Authors",path:""},
+                {id:2, name:"Icons",path:""},
+                {id:3, name:"Animated icons",path:""},
+                {id:4, name:"Icon tags",path:""},
               ].map((item) => (
                 <motion.li
-                  key={item}
+                  key={item.id}
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Link
-                    to="#"
+                    to={item.path}
                     className="hover:text-gray-500 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
@@ -88,7 +88,7 @@ const Footer = () => {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Link
-                    to="#"
+                    to={item.path}
                     className="hover:text-gray-400 dark:text-gray-300 transition-colors text-sm dark:hover:text-gray-200"
                   >
                     {item.name}

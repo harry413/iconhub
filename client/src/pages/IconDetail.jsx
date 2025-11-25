@@ -17,11 +17,11 @@ const IconDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { theme } = useTheme();
 
+
   useEffect(() => {
     const fetchIcon = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/icons/${id}`);
-        
         const data = await response.json();
 
         if (!response.ok) {
@@ -30,23 +30,31 @@ const IconDetail = () => {
 
         setIcon(data);
         
-    // Check if icon is in favorites (would need to implement this)
-        // const token = localStorage.getItem('token');
-        
-        // if (token) {
-        //   const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
-        //      method: 'GET',
-        //     headers: { Authorization: `Bearer ${token}`}
-        //   });
-          
-        //   const userData = await favResponse.json();
-          
-        //   if (Array.isArray(userData.favorites)) {
-        //     setIsFavorite(userData.favorites.includes(id));
-        //   } else {
-        //     setIsFavorite(false);
-        //   }
-        // }
+    // Check if icon is in favorites (implemented)
+        try {
+          const token = localStorage.getItem('token');
+          if (token) {
+            const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
+              method: 'GET',
+              headers: { Authorization: `Bearer ${token}` }
+            });
+    
+
+            if (favResponse.ok) {
+              const userData = await favResponse.json();
+    
+              if (Array.isArray(userData.favorites)) {
+                setIsFavorite(userData.favorites.includes(id));
+              } else {
+                setIsFavorite(false);
+              }
+            }
+          }
+        } catch (favErr) {
+          // Non-fatal: if favorite check fails, log and continue
+          // (don't surface to UI as it shouldn't block icon display)
+          console.error('Failed to check favorites', favErr);
+        }
         
         successSound.play();
       } catch (err) {
@@ -172,7 +180,7 @@ const IconDetail = () => {
             >
               <div
                 className="w-full h-64 flex items-center justify-center"
-                dangerouslySetInnerHTML={{ __html: icon.svg }}
+                dangerouslySetInnerHTML={{ __html: icon.svg , style:"width:200%; height:200%"}}
               />
             </motion.div>
 

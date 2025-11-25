@@ -336,6 +336,7 @@ router.get('/favorites', authenticate, async (req, res) => {
       .select('favorites');
       
     res.json(user.favorites);
+    console.log(user.favorites)
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
