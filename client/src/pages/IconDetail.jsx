@@ -149,11 +149,7 @@ const IconDetail = () => {
 
   return (
     <div
-      className={`container mx-auto px-4 py-8 ${
-        theme === "dark"
-          ? "bg-gray-900 text-white"
-          : "bg-gray-100 text-gray-900"
-      }`}
+      className='container mx-auto px-4 py-8'
     >
       <Button
         variant="ghost"
@@ -170,7 +166,7 @@ const IconDetail = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+        className="bg-white/10 dark:bg-gray-800/10 rounded-lg shadow-lg overflow-hidden"
       >
         <div className="p-6 md:p-8">
           <div className="flex flex-col md:flex-row gap-8">
@@ -180,7 +176,7 @@ const IconDetail = () => {
             >
               <div
                 className="w-full h-64 flex items-center justify-center"
-                dangerouslySetInnerHTML={{ __html: icon.svg , style:"width:200%; height:200%"}}
+                dangerouslySetInnerHTML={{ __html: icon.svg }}
               />
             </motion.div>
 
