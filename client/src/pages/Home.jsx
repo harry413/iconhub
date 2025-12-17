@@ -9,6 +9,8 @@ import { FiCopy } from "react-icons/fi";
 import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
+// import FloatingIcons from "../components/FloatingIcons"
+import {Wine} from "@harry413/icons"
 
  import { ToastContainer, toast } from 'react-toastify'
 import ClientTestimonial from "../components/Client";
@@ -70,7 +72,7 @@ import ClientTestimonial from "../components/Client";
             Your Projects
           </span>
         </motion.h1>
-
+        
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -120,6 +122,7 @@ import ClientTestimonial from "../components/Client";
           className="mx-auto mt-12 w-full max-w-lg rounded-lg"
         />
         )}
+        {/* <FloatingIcons/> */}
        </motion.div>
       </section>
 

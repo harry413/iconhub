@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
+import {AnimatePresence, motion} from "framer-motion"
 import { useNavigate } from "react-router-dom";
-import { motion } from 'framer-motion';
 import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
@@ -155,8 +155,6 @@ const handleIconClick = (id) => {
             <IconCard
               key={icon._id}
               icon={icon}
-              onDownload={handleDownload}
-              onFavorite={handleFavorite}
               onClick={() => handleIconClick(icon._id)}
             />
           ))}

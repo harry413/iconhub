@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { AnimatePresence, motion }  from 'framer-motion'
-import {Form, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { clickSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { FiArrowLeft } from 'react-icons/fi';
@@ -54,7 +54,56 @@ const jobPost = [
     type: "Remote",
     sbtitle: "Python, Machine Learning, Data Analysis",
     description: "We are seeking a Data Scientist to analyze complex datasets and develop predictive models to drive business insights."
+  },
+  {
+    id: 7,
+    time: "Contract based",
+    title: "Frontend Developer",
+    type: "Remote",
+    sbtitle: "React, JavaScript, CSS",
+    description: "We are looking for a skilled Frontend Developer to join our team. You will be responsible for building and maintaining our web applications."
+  },
+  { 
+    id: 8,
+    time: "full-time",
+    title: "Backend Developer",
+    type: "Hybrid",
+    sbtitle: "Node.js, Express, MongoDB",
+    description: "We are seeking a talented Backend Developer to help us develop robust server-side applications and APIs."
+  },
+  {
+    id: 9,
+    time:"full-time",
+    title: "UI/UX Designer",
+    type: "Remote",
+    sbtitle: "Figma, Adobe XD, User Research",
+    description: "Join our team as a UI/UX Designer to create intuitive and engaging user experiences for our digital products."
+  },
+  {
+    id: 10,
+    time: "part-time",
+    title: "full-stack Developer",
+    type: "Hybrid",
+    sbtitle: "MERN Stack, RESTful APIs, Agile",
+    description: "we are looking for a Marketing Specialist to develop and implement marketing strategies that drive brand awareness and customer engagement."
+  },
+  {
+    id: 11,
+    time: "Contract based",
+    title: "DevOps Engineer",
+    type: "On-site",
+    sbtitle: "AWS, Docker, CI/CD",
+    description: "We are looking for a DevOps Engineer to streamline our development and deployment processes using modern tools and practices."
+  },
+  {
+    id: 12,
+    time: "full-time",
+    title: "Data Scientist",
+    type: "Remote",
+    sbtitle: "Python, Machine Learning, Data Analysis",
+    description: "We are seeking a Data Scientist to analyze complex datasets and develop predictive models to drive business insights."
   }
+  
 ];
 
 const Career = () => {
@@ -76,8 +125,7 @@ const Career = () => {
                 <FiArrowLeft className="mr-2" /> Back to main page
           </Button>
         <h1 className='font-bold text-center text-3xl '>Career Page</h1>
-        <div classNa
-        me="flex items-center justify-center pt-10 ">
+        <div className="flex items-center justify-center pt-10 ">
                 <input
                    type="text"
                    placeholder="Search for the role.."
@@ -102,7 +150,6 @@ const Career = () => {
                         className="mb-4 p-4 border rounded-lg shadow bg-green-700/10 transparent">
                     <h2 className="text-xl font-semibold">{job.title}</h2>
                     <p>{job.sbtitle}</p>
-                    
                     <Button variant="primary" className="mt-2" 
                       onClick={() =>{
                         setSelectedJob(job) 

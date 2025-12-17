@@ -22,8 +22,6 @@ const Auth = () => {
   const [error, setError] = useState('');
   const { theme } = useTheme()
 
-
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
