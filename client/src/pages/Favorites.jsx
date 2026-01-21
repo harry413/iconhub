@@ -24,7 +24,6 @@ const Favorites = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch favorites");
         }
-
         const data = await response.json();
         setFavorites(data);
       } catch (err) {

@@ -17,6 +17,21 @@ const IconDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { theme } = useTheme();
 
+  const [copied, setCopied] = useState(false);
+
+  
+  const handleCopy = async () => {
+    try {
+      // Logic to copy the string to clipboard
+      await navigator.clipboard.writeText(icon.svg);
+      setCopied(true);
+      
+      // Reset the "Copied" state after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy!', err);
+    }
+  };
 
   useEffect(() => {
     const fetchIcon = async () => {
@@ -68,17 +83,17 @@ const IconDetail = () => {
     fetchIcon();
   }, [id]);
 
-  const handleDownload = (format) => {
-    clickSound.play();
-    if (!icon) return;
+  // const handleDownload = (format) => {
+  //   clickSound.play();
+  //   if (!icon) return;
     
-    const link = document.createElement('a');
-    link.href = format === 'svg' ? icon.svg : icon.tsx;
-    link.download = `${icon.name}.${format}`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  //   const link = document.createElement('a');
+  //   link.href = format === 'svg' ? icon.svg : icon.tsx;
+  //   link.download = `${icon.name}.${format}`;
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   const toggleFavorite = async () => {
     clickSound.play();
@@ -172,12 +187,25 @@ const IconDetail = () => {
           <div className="flex flex-col md:flex-row gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex-1 flex items-center justify-center p-8 bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600 rounded-lg"
+              className="relative flex-1 flex items-center justify-center p-4 bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600 rounded-lg"
             >
               <div
                 className="w-full h-64 flex items-center justify-center"
                 dangerouslySetInnerHTML={{ __html: icon.svg }}
               />
+              <div>
+                
+                <motion.button
+                  variant={isFavorite ? "default" : "outline"}
+                  onClick={toggleFavorite}
+                  initial={{ scale: 1 }}
+                  whileTap={{ scale: 0.6, duration: 0.2,type: "spring"  }}
+                  animate={{  scale: 1, duration: 0.2, ease: "easeInOut", type: "spring"  }}
+                  className="flex items-center absolute right-2 top-2 px-2 py-1  text-white text-2xl rounded"
+                > 
+                  {isFavorite ? <FiHeart className="mr-2" /> : <FiHeart className="mr-2 text-red" />}
+                </motion.button>
+              </div>
             </motion.div>
 
             <div className="flex-1">
@@ -207,32 +235,32 @@ const IconDetail = () => {
 
               <div className="flex flex-wrap gap-4 mt-8">
                 <ShareButton icon={icon} className="z-10" />
-                <Button
+                {/* <Button
                   onClick={() => handleDownload("svg")}
                   className="flex items-center"
                 >
                   <FiDownload className="mr-2" /> Download SVG
-                </Button>
-                <Button
+                </Button> */}
+                {/* <Button
                   onClick={() => handleDownload("png")}
                   className="flex items-center"
                 >
                   <FiDownload className="mr-2" /> Download PNG
-                </Button>
-                <Button
+                </Button> */}
+                <button
+                  onClick={handleCopy}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-md transition-colors ${
+                    copied ? 'bg-green-100 text-green-700' : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
+                >
+                  {copied ? 'Copied!' : 'Copy Code'}
+                </button>
+                {/* <Button
                   onClick={() => handleDownload("tsx")}
                   className="flex items-center"
                 >
                   <FiDownload className="mr-2" /> Download Animated
-                </Button>
-                <Button
-                  variant={isFavorite ? "default" : "outline"}
-                  onClick={toggleFavorite}
-                  className="flex items-center"
-                >
-                  <FiHeart className="mr-2" />
-                  {isFavorite ? "Favorited" : "Add to Favorites"}
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

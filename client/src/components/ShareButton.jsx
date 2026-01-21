@@ -10,20 +10,11 @@ import {
   FaRegCopy,
 } from "react-icons/fa";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { toast } from "react-hot-toast";
 
 const ShareButton = ({ icon }) => {
   const [isOpen, setIsOpen] = useState(false);
   const shareUrl = `${window.location.origin}/icons/${icon._id}`;
   const shareText = `Check out this ${icon.name} icon from IconHub!`;
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(shareUrl);
-    clickSound.play();
-    toast.success("Link copied to clipboard!");
-  };
-
 
   
   const shareOnSocial = (platform) => {
@@ -73,7 +64,7 @@ const ShareButton = ({ icon }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 mb-2 w-64 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50"
+          className="absolute left-0 mb-2 w-64 p-4 bg-whit/20 dark:bg-gray-800/20 rounded-lg shadow-lg z-50"
         >
           <h4 className="font-medium mb-3">Share this icon</h4>
 
@@ -103,17 +94,7 @@ const ShareButton = ({ icon }) => {
               <FaLinkedin className="text-blue-700" />
             </Button>
           </div>
-          <div className="flex items-center gap-2">
-            <Input value={shareUrl} readOnly className="flex-1 text-sm" />
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={copyToClipboard}
-              title="Copy link"
-            >
-              <FaRegCopy />
-            </Button>
-          </div>
+         
         </motion.div>
       )}
     </div>

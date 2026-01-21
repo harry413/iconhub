@@ -187,7 +187,7 @@ const Career = () => {
                   <p className='font-bold'>{selectedJob.sbtitle} </p>
                   <p>Job Description: {selectedJob.description} </p>
                     <div className='flex items-center justify-center gap-4 p-2 mt-6'>
-                      <button className="border border-red-500 text-red-500 hover:text-red-700 rounded-lg px-2 py-1" onClick={() => setOpen(close)}> Close</button>
+                      <button className="border border-red-500 text-red-500 hover:text-red-700 rounded-lg px-2 py-1" onClick={() => setOpen(false)}> Close</button>
                       <button className="border border-blue-500 text-blue-500 hover:text-blue-700 rounded-lg px-2 py-1">Proceed</button>
                     </div>
                 </div>

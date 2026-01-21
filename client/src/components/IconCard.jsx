@@ -4,7 +4,8 @@ import { hoverSound, clickSound} from '../utils/Sounds';
 
 
 const IconCard = ({ icon, onClick}) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

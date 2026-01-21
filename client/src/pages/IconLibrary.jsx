@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import {AnimatePresence, motion} from "framer-motion"
 import { useNavigate } from "react-router-dom";
@@ -6,6 +5,7 @@ import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { successSound } from '../utils/Sounds';
+import { debounce } from '@mui/material';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 // import {List} from "react-window"
@@ -37,14 +37,11 @@ const handleIconClick = (id) => {
         setIsLoading(false);
       }
     };
-   
-
     fetchIcons();
   }, []);
 
   useEffect(() => {
     let results = icons;
-    
     if (searchTerm) {
       results = results.filter(icon =>
         icon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,23 +58,23 @@ const handleIconClick = (id) => {
 
   const categories = ['all', ...new Set(icons.map(icon => icon.category))];
 
-  const handleDownload = (icon) => {
-    // Create a temporary link to download the SVG/icon file
-    console.error("Icon or SVG data is missing:", icon);
-    const svgData = icon.svg; // assuming icon.svg contains SVG markup as string
-    const blob = new Blob([svgData], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
+  // const handleDownload = (icon) => {
+  //   // Create a temporary link to download the SVG/icon file
+  //   console.error("Icon or SVG data is missing:", icon);
+  //   const svgData = icon.svg; // assuming icon.svg contains SVG markup as string
+  //   const blob = new Blob([svgData], { type: 'image/svg+xml' });
+  //   const url = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${icon.name}.svg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  //   const link = document.createElement('a');
+  //   link.href = url;
+  //   link.download = `${icon.name}.svg`;
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
 
-    URL.revokeObjectURL(url);
-    console.log('Downloading:', icon.name);
-  };
+  //   URL.revokeObjectURL(url);
+  //   console.log('Downloading:', icon.name);
+  // };
 
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage if available
@@ -85,19 +82,19 @@ const handleIconClick = (id) => {
     return stored ? JSON.parse(stored) : [];
   });
 
-  const handleFavorite = (icon) => {
-    setFavorites(prev => {
-      let updated;
-      if (prev.some(fav => fav._id === icon._id)) {
-        updated = prev.filter(fav => fav._id !== icon._id);
-      } else {
-        updated = [...prev, icon];
-      }
+  // const handleFavorite = (icon) => {
+  //   setFavorites(prev => {
+  //     let updated;
+  //     if (prev.some(fav => fav._id === icon._id)) {
+  //       updated = prev.filter(fav => fav._id !== icon._id);
+  //     } else {
+  //       updated = [...prev, icon];
+  //     }
 
-      localStorage.setItem('favorites', JSON.stringify(updated));
-      return updated;
-    });
-  };
+  //     localStorage.setItem('favorites', JSON.stringify(updated));
+  //     return updated;
+  //   });
+  // };
 
   useEffect(() => {
     // Optionally, update filteredIcons to mark favorites
@@ -108,6 +105,10 @@ const handleIconClick = (id) => {
       }))
     );
   }, [favorites]);
+
+  const Searching = debounce((e) => {
+    setSearchTerm(e.target.value)
+  },1000)
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -124,17 +125,18 @@ const handleIconClick = (id) => {
           type="text"
           placeholder="Search icons..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={Searching}
           className="flex-1 p-2 border border-gray-400 rounded-full focus:outline-none"
         />
+
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
-            {categories.map(cat => (
-              <SelectItem key={cat} value={cat}>
-                {cat?.charAt(0)?.toUpperCase() + cat?.slice(1)}
+            {categories.map(categorie => (
+              <SelectItem key={categorie} value={categorie}>
+                {categorie?.charAt(0)?.toUpperCase() + categorie?.slice(1)}
               </SelectItem>
             ))}
           </SelectContent>
