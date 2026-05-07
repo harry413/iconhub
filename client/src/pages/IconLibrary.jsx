@@ -167,7 +167,7 @@ const handleIconClick = (id) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-12"
+          className="text-center py-12 min-h-screen"
         >
           <p className="text-xl">No icons found matching your criteria</p>
         </motion.div>

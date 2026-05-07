@@ -39,7 +39,7 @@ const Footer = () => {
               HarryIconify
             </h2>
           </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 my-8" >
 
           {/* Applications Section */}
           <motion.div variants={itemVariants} className="gap-8">

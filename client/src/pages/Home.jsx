@@ -9,9 +9,6 @@ import { FiCopy } from "react-icons/fi";
 import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
-// import FloatingIcons from "../components/FloatingIcons"
-import {Wine} from "@harry413/icons"
-
  import { ToastContainer, toast } from 'react-toastify'
 import ClientTestimonial from "../components/Client";
  
@@ -22,7 +19,7 @@ import ClientTestimonial from "../components/Client";
      position: "top-right",
      autoClose: 2000,
      hideProgressBar: true,
-     closeOnClick: true,
+     closeOnClick: true,                                                  
      pauseOnHover: true,
      draggable: true,
      progress: undefined,
@@ -122,7 +119,6 @@ import ClientTestimonial from "../components/Client";
           className="mx-auto mt-12 w-full max-w-lg rounded-lg"
         />
         )}
-        {/* <FloatingIcons/> */}
        </motion.div>
       </section>
 

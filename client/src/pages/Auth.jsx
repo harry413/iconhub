@@ -1,12 +1,13 @@
 import { useState, } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
+
 import { clickSound, successSound, errorSound } from "../utils/Sounds";
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+// import { duration } from '@mui/material';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const Auth = () => {
@@ -20,7 +21,7 @@ const Auth = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { theme } = useTheme()
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -81,18 +82,23 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-evenly py-12 ">
+    <div className=" flex flex-col md:flex-row items-center justify-center w-full ">
+      <div className="w-full md:w-1/2">
+          <motion.video 
+              initial={{opacity:0}}
+              animate={{opacity:1}}
+              transition={{duration:1.5}}
+              control autoPlay muted loop  className='w-full h-[900px] object-cover opacity-25 mask-r-from-50%'>
+            <source src="./home_page.webm" type="video/mp4"/>
+          </motion.video>
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={` w-full max-w-md p-8 md:px-24 md:py-28 md:rounded-full shadow-2xl md:border-2   ${
-          theme === "dark"
-          ? " bg-transparent outline md:border-white shadow-white"
-          : "bg-transparent md:border-black shadow-black"
-          }`}
+        className=" w-full md:w-1/2 p-8 md:px-42 md:py-28 bg-transparent  "
           >
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-center text-green-900/30 dark:text-gray-300/20">
           {isLogin ? "Login" : "Register"}
         </h2>
         {error && (
@@ -108,7 +114,7 @@ const Auth = () => {
         <form onSubmit={handleSubmit}>
           {!isLogin && (
             <div className="mb-4">
-              <label htmlFor="username" className="block mb-2 text-sm">
+              <label htmlFor="username" className="block mb-2 text-sm font-semibold">
                 Username
               </label>
               <Input
@@ -118,14 +124,14 @@ const Auth = () => {
                 value={formData.username}
                 onChange={handleChange}
                 required
-                className=""
+                className="border border-gray-700"
                 placeholder="Username must be 3-20 characters long and can only contain letters, numbers, and underscores"
               />
             </div>
           )}
 
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-2 text-sm">
+            <label htmlFor="email" className="block mb-2 text-sm font-semibold">
               Email
             </label>
             <Input
@@ -141,7 +147,7 @@ const Auth = () => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-2 text-sm">
+            <label htmlFor="password" className="block mb-2 text-sm font-semibold">
               Password
             </label>
             <Input

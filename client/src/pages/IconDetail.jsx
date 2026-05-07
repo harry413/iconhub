@@ -22,11 +22,11 @@ const IconDetail = () => {
   
   const handleCopy = async () => {
     try {
-      // Logic to copy the string to clipboard
+    
       await navigator.clipboard.writeText(icon.svg);
       setCopied(true);
       
-      // Reset the "Copied" state after 2 seconds
+      
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy!', err);
@@ -45,7 +45,7 @@ const IconDetail = () => {
 
         setIcon(data);
         
-    // Check if icon is in favorites (implemented)
+    // Check if icon is in favorites
         try {
           const token = localStorage.getItem('token');
           if (token) {
@@ -66,8 +66,6 @@ const IconDetail = () => {
             }
           }
         } catch (favErr) {
-          // Non-fatal: if favorite check fails, log and continue
-          // (don't surface to UI as it shouldn't block icon display)
           console.error('Failed to check favorites', favErr);
         }
         
