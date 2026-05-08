@@ -61,8 +61,9 @@ const Favorites = () => {
 
   if (!user) {
     return (
-      <div className="text-center py-12 min-h-screen pt-24">
-        <h2 className="text-2xl mb-4">Please login to view your favorites</h2>
+      <div className=" flex flex-col items-center justify-center  py-12 min-h-screen ">
+        <div className="flex flex-col items-center justify-center bg-white/40 backdrop-blur-lg border border-white/20 shadow-lg px-10 py-6 rounded-lg">
+          <h2 className="text-2xl mb-4">Please login to view your favorites</h2>
         <Button
           onClick={() => {
             clickSound.play();
@@ -72,12 +73,13 @@ const Favorites = () => {
         >
           Login
         </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen ">
+    <div className="container mx-auto pt-20 pb-4 py-8 min-h-screen ">
       <h1 className="text-3xl font-bold mb-8">Your Favorite Icons</h1>
 
       {loading ? (

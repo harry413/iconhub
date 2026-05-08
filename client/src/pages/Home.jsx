@@ -56,8 +56,8 @@ import ClientTestimonial from "../components/Client";
   }
 
   return (
-    <div className="container mx-auto px-4 py-24 ">
-      <section className="flex px-6 flex-col md:flex-row items-center justify-center gap-12 w-full">
+    <div className="container mx-auto px-4 py-24  ">
+      <section className="flex px-6 flex-col md:flex-row items-center justify-center gap-12 w-full mt-8 md:mt-20">
        <div className="flex flex-col items-start justify-center text-center md:text-left md:w-1/2">
          <motion.h1
           initial={{ opacity: 0, y: -20 }}

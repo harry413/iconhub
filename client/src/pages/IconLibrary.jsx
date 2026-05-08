@@ -111,7 +111,7 @@ const handleIconClick = (id) => {
   },1000)
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto pt-20 pb-4 py-8">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -120,13 +120,13 @@ const handleIconClick = (id) => {
         Icon Library
       </motion.h1>
 
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
+      <div className="flex flex-col md:flex-row gap-4 mb-8 mx-4 ">
         <Input
           type="text"
           placeholder="Search icons..."
           value={searchTerm}
           onChange={Searching}
-          className="flex-1 p-2 border border-gray-400 rounded-full focus:outline-none"
+          className="flex-1 p-2 border border-gray-400 rounded-full focus:outline-none "
         />
 
         <Select value={category} onValueChange={setCategory}>

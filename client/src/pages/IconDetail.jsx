@@ -58,7 +58,7 @@ const IconDetail = () => {
             if (favResponse.ok) {
               const userData = await favResponse.json();
     
-              if (Array.isArray(userData.favorites)) {
+              if (Array.isArray(userData?.favorites)) {
                 setIsFavorite(userData.favorites.includes(id));
               } else {
                 setIsFavorite(false);
@@ -140,7 +140,7 @@ const IconDetail = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="text-center py-12"
+        className="text-center min-h-screen flex items-center justify-center flex-col gap-4"
       >
         <p className="text-xl text-red-500">{error}</p>
         <Button
