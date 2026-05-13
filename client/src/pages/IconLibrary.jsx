@@ -5,7 +5,7 @@ import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { successSound } from '../utils/Sounds';
-import { debounce } from '@mui/material';
+import  debounce  from 'lodash.debounce';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 // import {List} from "react-window"

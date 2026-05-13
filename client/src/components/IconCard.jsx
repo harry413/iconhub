@@ -1,9 +1,8 @@
-import {useState} from "react"
+import { memo, useState } from "react"
 import { AnimatePresence, motion } from 'framer-motion';
-import { hoverSound, clickSound} from '../utils/Sounds';
+import { hoverSound, clickSound } from '../utils/Sounds';
 
-
-const IconCard = ({ icon, onClick}) => {
+const IconCard = ({ icon, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
@@ -44,4 +43,4 @@ const IconCard = ({ icon, onClick}) => {
   );
 };
 
-export default IconCard;
+export default memo(IconCard);

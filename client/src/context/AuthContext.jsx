@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { successSound, errorSound } from "../utils/Sounds";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const AuthContext = createContext({
   user: null,

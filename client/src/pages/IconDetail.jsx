@@ -8,6 +8,7 @@ import { FiDownload, FiHeart, FiArrowLeft } from 'react-icons/fi';
 import ShareButton from '../components/ShareButton';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+
 const IconDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ const IconDetail = () => {
           Authorization: `Bearer ${token}`
         }
       });
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to update favorites');
       }
