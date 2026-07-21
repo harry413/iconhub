@@ -6,13 +6,16 @@ import { clickSound, successSound, errorSound } from '../utils/Sounds';
 import { Button } from '../components/ui/button';
 import { FiDownload, FiHeart, FiArrowLeft } from 'react-icons/fi';
 import ShareButton from '../components/ShareButton';
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Fallback to localhost if env variable is not set
 
 
 const IconDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [icon, setIcon] = useState(null);
+  const [relatedIcons, setRelatedIcons] = useState([]);
+  const [trendingIcons, setTrendingIcons] = useState([]);
+  const [popularIcons, setPopularIcons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
@@ -43,29 +46,66 @@ const IconDetail = () => {
         if (!response.ok) {
           throw new Error(data.message || 'Failed to fetch icon');
         }
-
+  
         setIcon(data);
         
+        try {
+          const iconsResponse = await fetch(`${BASE_URL}/api/icons`);
+          const allIcons = await iconsResponse.json();
+          if (iconsResponse.ok && Array.isArray(allIcons)) {
+            const recommended = allIcons
+              .filter((item) => item._id !== data._id)
+              .map((item) => {
+                const tagMatchCount = Array.isArray(item.tags)
+                  ? item.tags.filter((tag) => data.tags?.includes(tag)).length
+                  : 0;
+                const categoryScore = item.category === data.category ? 10 : 0;
+                return {
+                  item,
+                  score: categoryScore + tagMatchCount,
+                };
+              })
+              .filter(({ score }) => score > 0)
+              .sort((a, b) => b.score - a.score || b.item.downloads - a.item.downloads)
+              .slice(0, 6)
+              .map(({ item }) => item);
+
+            setRelatedIcons(recommended);
+            const recommendedIds = new Set(recommended.map((item) => item._id));
+
+            const trending = allIcons
+              .filter(
+                (item) =>
+                  item._id !== data._id &&
+                  !recommendedIds.has(item._id) &&
+                  item.category === data.category
+              )
+              .sort((a, b) => b.downloads - a.downloads)
+              .slice(0, 6);
+
+            setTrendingIcons(trending);
+            const trendingIds = new Set(trending.map((item) => item._id));
+
+            const popular = allIcons
+              .filter(
+                (item) =>
+                  item._id !== data._id &&
+                  !recommendedIds.has(item._id) &&
+                  !trendingIds.has(item._id)
+              )
+              .sort((a, b) => b.downloads - a.downloads)
+              .slice(0, 6);
+
+            setPopularIcons(popular);
+          }
+        } catch (relatedErr) {
+          console.error('Failed to fetch recommended icons', relatedErr);
+        }
+
     // Check if icon is in favorites
         try {
           const token = localStorage.getItem('token');
-          if (token) {
-            const favResponse = await fetch(`${BASE_URL}/api/users/me`, {
-              method: 'GET',
-              headers: { Authorization: `Bearer ${token}` }
-            });
-    
-
-            if (favResponse.ok) {
-              const userData = await favResponse.json();
-    
-              if (Array.isArray(userData?.favorites)) {
-                setIsFavorite(userData.favorites.includes(id));
-              } else {
-                setIsFavorite(false);
-              }
-            }
-          }
+          if (token) { }
         } catch (favErr) {
           console.error('Failed to check favorites', favErr);
         }
@@ -111,9 +151,18 @@ const IconDetail = () => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(response)
+
+      const rawBody = await response.text();
+      let serverError = rawBody;
+      try {
+        const parsed = JSON.parse(rawBody);
+        serverError = parsed.message || JSON.stringify(parsed);
+      } catch {}
+
+      console.log('Status:', response.status);
+      console.log('Server:', serverError);
       if (!response.ok) {
-        throw new Error('Failed to update favorites');
+        throw new Error(serverError || 'Failed to update favorites');
       }
 
       setIsFavorite(!isFavorite);
@@ -265,6 +314,87 @@ const IconDetail = () => {
           </div>
         </div>
       </motion.div>
+
+      {relatedIcons.length > 0 && (
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold mb-4">Recommended Icons</h2>
+          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-3">
+            {relatedIcons.map((related) => (
+              <button
+                key={related._id}
+                type="button"
+                onClick={() => {
+                  clickSound.play();
+                  navigate(`/icons/${related._id}`);
+                }}
+                className="group relative aspect-square overflow-hidden rounded-3xl bg-slate-900/90 shadow-lg shadow-slate-950/20 ring-1 ring-white/10 transition duration-200 hover:-translate-y-1 hover:bg-slate-800/95 focus:outline-none focus:ring-2 focus:ring-primary/70"
+                title={related.name}
+              >
+                <div className="flex h-full w-full items-center justify-center p-2">
+                  <div className="h-14 w-14 text-white" dangerouslySetInnerHTML={{ __html: related.svg }} />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-2 mb-2 hidden rounded-full bg-black/75 px-2 py-1 text-center text-[11px] text-white backdrop-blur-sm group-hover:block">
+                  {related.name}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {trendingIcons.length > 0 && (
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold mb-4">Trending Icons</h2>
+          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-3">
+            {trendingIcons.map((related) => (
+              <button
+                key={related._id}
+                type="button"
+                onClick={() => {
+                  clickSound.play();
+                  navigate(`/icons/${related._id}`);
+                }}
+                className="group relative aspect-square overflow-hidden rounded-3xl bg-slate-900/90 shadow-lg shadow-slate-950/20 ring-1 ring-white/10 transition duration-200 hover:-translate-y-1 hover:bg-slate-800/95 focus:outline-none focus:ring-2 focus:ring-primary/70"
+                title={related.name}
+              >
+                <div className="flex h-full w-full items-center justify-center p-2">
+                  <div className="h-14 w-14 text-white" dangerouslySetInnerHTML={{ __html: related.svg }} />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-2 mb-2 hidden rounded-full bg-black/75 px-2 py-1 text-center text-[11px] text-white backdrop-blur-sm group-hover:block">
+                  {related.name}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {popularIcons.length > 0 && (
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold mb-4">Popular Icons</h2>
+          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-3">
+            {popularIcons.map((related) => (
+              <button
+                key={related._id}
+                type="button"
+                onClick={() => {
+                  clickSound.play();
+                  navigate(`/icons/${related._id}`);
+                }}
+                className="group relative aspect-square overflow-hidden rounded-3xl bg-slate-900/90 shadow-lg shadow-slate-950/20 ring-1 ring-white/10 transition duration-200 hover:-translate-y-1 hover:bg-slate-800/95 focus:outline-none focus:ring-2 focus:ring-primary/70"
+                title={related.name}
+              >
+                <div className="flex h-full w-full items-center justify-center p-2">
+                  <div className="h-14 w-14 text-white" dangerouslySetInnerHTML={{ __html: related.svg }} />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-2 mb-2 hidden rounded-full bg-black/75 px-2 py-1 text-center text-[11px] text-white backdrop-blur-sm group-hover:block">
+                  {related.name}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

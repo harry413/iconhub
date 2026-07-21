@@ -50,8 +50,8 @@ const Auth = () => {
         throw new Error(data.message || 'Something went wrong');
       }
 
-      // Save token and user data
-      localStorage.setItem('token', data.token);
+      // Save token and user data through auth context
+      login(data.token, data.user);
       successSound.play();
       navigate('/');
     } catch (err) {

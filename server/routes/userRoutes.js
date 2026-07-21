@@ -299,15 +299,24 @@ router.put('/me', authenticate, async (req, res) => {
 // Add icon to favorites (protected route)
 router.post('/favorites/:iconId', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId);
-    if (user.favorites.includes(req.params.iconId)) {
-      return res.status(400).json({ message: 'Icon already in favorites' });
+    const userId = req.user?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: 'Invalid authentication token' });
     }
-    user.favorites.push(req.params.iconId);
-    await user.save();
 
-    res.json({ message: 'Icon added to favorites', favorites: user.favorites });
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { favorites: req.params.iconId } },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Icon added to favorites', favorites: updatedUser.favorites || [] });
   } catch (err) {
+    console.error('ERROR:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -315,14 +324,24 @@ router.post('/favorites/:iconId', authenticate, async (req, res) => {
 // Remove icon from favorites (protected route)
 router.delete('/favorites/:iconId', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId);
-    user.favorites = user.favorites.filter(
-      favId => favId.toString() !== req.params.iconId
+    const userId = req.user?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: 'Invalid authentication token' });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { favorites: req.params.iconId } },
+      { new: true }
     );
-    
-    await user.save();
-    res.json({ message: 'Icon removed from favorites', favorites: user.favorites });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Icon removed from favorites', favorites: updatedUser.favorites || [] });
   } catch (err) {
+    console.error('ERROR:', err);
     res.status(500).json({ message: err.message });
   }
 });

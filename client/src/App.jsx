@@ -4,12 +4,14 @@ import { AnimatePresence } from 'framer-motion';
 
 //context
 import { ThemeProvider } from './context/ThemeContext';
+import { SoundProvider } from './context/SoundContext';
   
 //components
 import LoadingScreen from './components/LoadingScreen';
 import RequireAuth from './components/RequireAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SoundToggle from './components/SoundToggle';
 
 //pages
 const Home = lazy(() => import('./pages/Home'));
@@ -42,45 +44,48 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider> 
-         {loading && <LoadingScreen />}
-      {!loading && (
-        <div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
-          <Navbar />
-        <Suspense fallback={<LoadingScreen />}>
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/icons" element={<IconLibrary />} />
-              <Route path="/icons/:id" element={<IconDetail />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/settings" element={<UserSetting />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/career" element={<Career />} />
-              <Route path="/contactus" element={<ContactUs />} />
-              <Route path="/docs" element={<Docs />} />
-              <Route
-                path="/admin/*"
-                element={
-                  <RequireAuth adminOnly>
-                    <AdminLayout />
-                  </RequireAuth>
-                }
-              >
-                <Route index element={<AdminDashboard />} />
-                <Route path="upload" element={<Upload />} />
-                <Route path="analytics" element={<Analytics />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="users" element={<UserManagement />} />
-                <Route path="icons" element={<IconManagement />} />
-              </Route>
-              <Route path="/favorite" element={<Favorites />} />
-            </Routes>
-          </AnimatePresence>
-        </Suspense>
-        <Footer />
-      </div>
+    <ThemeProvider>
+      <SoundProvider>
+        {loading && <LoadingScreen />}
+        {!loading && (
+          <div className="min-h-screen relative flex flex-col bg-gradient-to-r from-[#abbaab] to-[#ffffff] dark:from-slate-900 dark:to-[#1f1c18]">
+            <Navbar />
+            <Suspense fallback={<LoadingScreen />}>
+              <AnimatePresence mode="wait">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/icons" element={<IconLibrary />} />
+                  <Route path="/icons/:id" element={<IconDetail />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/settings" element={<UserSetting />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/career" element={<Career />} />
+                  <Route path="/contactus" element={<ContactUs />} />
+                  <Route path="/docs" element={<Docs />} />
+                  <Route
+                    path="/admin/*"
+                    element={
+                      <RequireAuth adminOnly>
+                        <AdminLayout />
+                      </RequireAuth>
+                    }
+                  >
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="upload" element={<Upload />} />
+                    <Route path="analytics" element={<Analytics />} />
+                    <Route path="settings" element={<Settings />} />
+                    <Route path="users" element={<UserManagement />} />
+                    <Route path="icons" element={<IconManagement />} />
+                  </Route>
+                  <Route path="/favorite" element={<Favorites />} />
+                </Routes>
+              </AnimatePresence>
+            </Suspense>
+            <Footer />
+            <SoundToggle />
+          </div>
         )}
+      </SoundProvider>
     </ThemeProvider>
   );
 }

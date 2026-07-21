@@ -18,7 +18,7 @@ const Settings = () => {
   const [settings, setSettings] = useState({
     siteTitle: "IconHub",
     siteDescription: "Beautiful icons for your projects",
-    siteUrl: "https://iconhub.example.com",
+    siteUrl: "https://iconhub-mu.vercel.app",
     allowRegistrations: true,
     emailNotifications: true,
     maintenanceMode: false,

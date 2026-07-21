@@ -9,7 +9,7 @@ import { FiCopy } from "react-icons/fi";
 import { FaFileArchive, FaIcons } from "react-icons/fa";
 import { GiCircleSparks } from "react-icons/gi";
 import CircularOrbit from "../components/CircularOrbit"
- import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import ClientTestimonial from "../components/Client";
  
  
@@ -56,8 +56,8 @@ import ClientTestimonial from "../components/Client";
   }
 
   return (
-    <div className="container mx-auto px-4 py-24  ">
-      <section className="flex px-6 flex-col md:flex-row items-center justify-center gap-12 w-full mt-8 md:mt-20">
+    <div className="container mx-auto px-4 py-4">
+      <section className="flex px-6 flex-col md:flex-row items-center justify-center gap-12 w-full mt-8 md:mt-2">
        <div className="flex flex-col items-start justify-center text-center md:text-left md:w-1/2">
          <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -69,7 +69,7 @@ import ClientTestimonial from "../components/Client";
             Your Projects
           </span>
         </motion.h1>
-        
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -85,8 +85,7 @@ import ClientTestimonial from "../components/Client";
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
           className="flex flex-col lg:flex-row items-center justify-center md:gap-8 gap-2"
-        >
-          
+        > 
           <Link to="/icons" onClick={() => clickSound.play()}>
             <input
               type="text"
@@ -122,11 +121,11 @@ import ClientTestimonial from "../components/Client";
        </motion.div>
       </section>
 
-      <section className='w-full py-20 px-8'>
+      <section className='w-full py-10 px-8'>
         <CircularOrbit />
       </section>
 
-      <section className="mb-16 mt-28">
+      <section className="mb-16 mt-12">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

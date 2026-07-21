@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   googleId: { type: String, unique: true, sparse: true }, // only for Google users
   avatar: { type: String },
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Icon" }],
+  favorites: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Icon" }], default: [] },
   createdAt: { type: Date, default: Date.now },
 });
 // Handle missing password (Google users)
