@@ -352,9 +352,12 @@ router.get('/favorites', authenticate, async (req, res) => {
     const user = await User.findById(req.user.userId)
       .populate('favorites')
       .select('favorites');
-      
-    res.json(user.favorites);
-    console.log(user.favorites)
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user.favorites || []);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -364,7 +367,14 @@ router.get('/favorites', authenticate, async (req, res) => {
 router.get('/favorites/:iconId/check', authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
-    const isFavorited = user.favorites.includes(req.params.iconId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isFavorited = Array.isArray(user.favorites)
+      ? user.favorites.includes(req.params.iconId)
+      : false;
+
     res.json({ isFavorited });
   } catch (err) {
     res.status(500).json({ message: err.message });

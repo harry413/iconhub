@@ -99,7 +99,7 @@ const ClientTestimonial = () =>{
         }
     }, [isPaused])
     return(
-      <div className=' py-16 px-4'>
+      <div className='py-16 px-4'>
         <div className="max-w-full mx-auto">
           <h2 className='text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-4'>
             What Our Client Say

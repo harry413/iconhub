@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const { logout } = useAuth();
   return (
-    <div className="relative mb-20">
+    <div className="relative mb-18">
     <nav
       className={`py-4 px-6 fixed top-0 right-0 left-0 z-50 ${
         theme === "dark" ? "bg-transparent bg-black/30 backdrop-blur-md shadow-lg" : "bg-transparent bg-white/30 backdrop-blur-md shadow-lg"
@@ -48,7 +48,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center space-x-6 font-semibold">
+        <div className="hidden md:flex items-center space-x-6 font-extrabold">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -182,3 +182,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

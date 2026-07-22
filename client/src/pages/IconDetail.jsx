@@ -105,7 +105,24 @@ const IconDetail = () => {
     // Check if icon is in favorites
         try {
           const token = localStorage.getItem('token');
-          if (token) { }
+          if (token) {
+            const favResponse = await fetch(
+              `${BASE_URL}/api/users/favorites/${id}/check`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            if (favResponse.ok) {
+              const favData = await favResponse.json();
+              setIsFavorite(favData.isFavorited);
+            } else {
+              const errorData = await favResponse.json();
+              console.warn('Favorite check failed', errorData.message);
+            }
+          }
         } catch (favErr) {
           console.error('Failed to check favorites', favErr);
         }

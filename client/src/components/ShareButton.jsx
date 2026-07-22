@@ -52,7 +52,7 @@ const ShareButton = ({ icon }) => {
           clickSound.play();
           setIsOpen(!isOpen);
         }}
-        onMouseEnter={() => hoverSound.play()}
+        onMouseEnter={() => hoverSound.play() }
         className="flex items-center rounded-full p-2"
       >
         <FaShareAlt />
@@ -96,6 +96,7 @@ const ShareButton = ({ icon }) => {
           </div>
          
         </motion.div>
+        
       )}
     </div>
   );

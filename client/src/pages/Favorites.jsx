@@ -62,18 +62,44 @@ const Favorites = () => {
 
   if (!user) {
     return (
-      <div className=" flex flex-col items-center justify-center  py-12 min-h-screen ">
-        <div className="flex flex-col items-center justify-center bg-white/40 backdrop-blur-lg border border-white/20 shadow-lg px-10 py-6 rounded-lg">
-          <h2 className="text-2xl mb-4">Please login to view your favorites</h2>
-        <Button
-          onClick={() => {
-            clickSound.play();
-            navigate("/auth");
-          }}
-          className="px-6 py-2 rounded cursor-pointer"
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden py-12 bg-[linear-gradient(135deg,_rgba(243,244,246,0.94),_rgba(224,231,255,0.9))]">
+        <motion.div
+          animate={{ y: [0, -18, 0], x: [0, 10, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-10 top-14 h-40 w-40 rounded-full bg-sky-200/70 blur-3xl"
+        />
+        <motion.div
+          animate={{ y: [0, 24, 0], x: [0, -12, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-10 right-10 h-48 w-48 rounded-full bg-indigo-200/80 blur-3xl"
+        />
+
+        <motion.div
+          animate={{ rotateY: [0, 10, 0, -10, 0], rotateX: [0, -6, 0, 6, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 flex items-center justify-center perspective-[1200px]"
         >
-          Login
-        </Button>
+          <div className="absolute h-72 w-72 rounded-[2rem] border border-white/70 bg-white/60 shadow-[0_20px_60px_rgba(99,102,241,0.14)] backdrop-blur-xl transform-gpu rotate-12" />
+          <div className="absolute h-72 w-72 rounded-[2rem] border border-sky-100 bg-sky-50/70 shadow-[0_20px_60px_rgba(14,165,233,0.12)] backdrop-blur-xl transform-gpu -rotate-12" />
+        </motion.div>
+
+        <div className="relative z-10 flex flex-col items-center justify-center rounded-[1.75rem] border border-white/70 bg-white/70 px-10 py-8 text-center shadow-[0_20px_80px_rgba(15,23,42,0.10)] backdrop-blur-2xl">
+          <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.35em] text-slate-500">
+            sign in required
+          </div>
+          <h2 className="mb-4 text-2xl font-semibold text-slate-800">Please login to view your favorites</h2>
+          <p className="mb-6 max-w-md text-sm text-slate-600">
+            Access your saved icons in a beautifully curated space.
+          </p>
+          <Button
+            onClick={() => {
+              clickSound.play();
+              navigate("/auth");
+            }}
+            className="px-6 py-2 rounded cursor-pointer bg-slate-900 text-white hover:bg-slate-700"
+          >
+            Login
+          </Button>
         </div>
       </div>
     );

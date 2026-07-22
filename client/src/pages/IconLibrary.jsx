@@ -5,7 +5,6 @@ import IconCard from '../components/IconCard';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { successSound } from '../utils/Sounds';
-import  debounce  from 'lodash.debounce';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 // import {List} from "react-window"
@@ -82,6 +81,10 @@ const handleIconClick = (id) => {
     return stored ? JSON.parse(stored) : [];
   });
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   // const handleFavorite = (icon) => {
   //   setFavorites(prev => {
   //     let updated;
@@ -106,12 +109,8 @@ const handleIconClick = (id) => {
     );
   }, [favorites]);
 
-  const Searching = debounce((e) => {
-    setSearchTerm(e.target.value)
-  },1000)
-
   return (
-    <div className="container mx-auto pt-20 pb-4 py-8">
+    <div className="container mx-auto pt-20 px-4 pb-4 py-8">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -125,7 +124,7 @@ const handleIconClick = (id) => {
           type="text"
           placeholder="Search icons..."
           value={searchTerm}
-          onChange={Searching}
+          onChange={handleSearchChange}
           className="flex-1 p-2 border border-gray-400 rounded-full focus:outline-none "
         />
 

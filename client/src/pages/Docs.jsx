@@ -452,6 +452,7 @@ const Docs = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('https://www.npmjs.com/package/@harry413/icons', '_blank')}
               className="bg-black dark:bg-gray-600 text-gray-200 font-semibold py-3 px-8 rounded-lg hover:bg-gray-900 transition-colors"
             >
               View on npm
@@ -459,6 +460,7 @@ const Docs = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('https://github.com/harry413/icons', '_blank')}
               className="border-2 border-gray-500 dark:border-white dark:text-white text-gray-700 font-semibold py-3 px-8 rounded-lg "
             >
               View Repository
