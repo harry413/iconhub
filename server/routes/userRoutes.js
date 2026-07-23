@@ -372,6 +372,7 @@ router.get('/favorites', authenticate, async (req, res) => {
 router.get('/favorites/:iconId/check', authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
+    console.log("User found:", user); // Debugging line
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
