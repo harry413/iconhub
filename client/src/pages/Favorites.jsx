@@ -20,12 +20,12 @@ const Favorites = () => {
         const response = await fetch(`${BASE_URL}/api/users/favorites`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-          console.log(response)
+          
         if (!response.ok) {
           throw new Error("Failed to fetch favorites");
         }
         const data = await response.json();
-        console.log(data)
+        
         setFavorites(data);
       } catch (err) {
         errorSound.play();

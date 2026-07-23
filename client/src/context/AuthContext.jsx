@@ -12,42 +12,83 @@ const AuthContext = createContext({
   logout: () => {},
 });
 
+const normalizeUser = (user) => {
+  if (!user) return null;
+
+  return {
+    ...user,
+    id: user.id || user._id,
+    isAdmin: Boolean(user.isAdmin),
+  };
+};
+
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem("user");
+      return savedUser ? normalizeUser(JSON.parse(savedUser)) : null;
+    } catch {
+      return null;
+    }
+  });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Check if user is already logged in on page load
+  const persistUser = (nextUser) => {
+    const normalizedUser = normalizeUser(nextUser);
+
+    if (normalizedUser) {
+      localStorage.setItem("user", JSON.stringify(normalizedUser));
+    } else {
+      localStorage.removeItem("user");
+    }
+  };
+
+  // Restore the session from local storage on refresh.
+  // Use the saved user immediately, then validate the token only if needed.
   useEffect(() => {
-    const checkAuth = async () => {
+    const token = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+
+    if (savedUser) {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-
-        const response = await fetch(`${BASE_URL}/api/users/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
-        } else {
-          localStorage.removeItem("token");
-          setUser(null);
-        }
-      } catch (err) {
-        console.error("Auth check failed:", err);
-        localStorage.removeItem("token");
-        setUser(null);
-      } finally {
-        setLoading(false);
+        const parsedUser = normalizeUser(JSON.parse(savedUser));
+        setUser(parsedUser);
+      } catch {
+        persistUser(null);
       }
-    };
+    }
 
-    checkAuth();
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
+    if (!savedUser) {
+      const checkAuth = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/api/users/me`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            const normalizedUser = normalizeUser(userData);
+            setUser(normalizedUser);
+            persistUser(normalizedUser);
+          }
+        } catch (err) {
+          console.error("Auth check failed:", err);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      checkAuth();
+      return;
+    }
+
+    setLoading(false);
   }, []);
 
   // ✅ For email/password login
@@ -78,11 +119,14 @@ export const AuthProvider = ({ children }) => {
   // ✅ Generic login (used for Google or credentials)
   const login = (token, user) => {
     localStorage.setItem("token", token);
-    setUser(user);
+    const normalizedUser = normalizeUser(user);
+    setUser(normalizedUser);
+    persistUser(normalizedUser);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    persistUser(null);
     setUser(null);
     navigate("/");
   };
