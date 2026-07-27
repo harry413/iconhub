@@ -8,6 +8,59 @@ import { FiDownload, FiHeart, FiArrowLeft } from 'react-icons/fi';
 import ShareButton from '../components/ShareButton';
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Fallback to localhost if env variable is not set
 
+const VARIANT_OPTIONS = [
+  { key: 'thin', label: 'Thin', strokeWidth: 1, fontWeight: 300 },
+  { key: 'light', label: 'Light', strokeWidth: 1.25, fontWeight: 400 },
+  { key: 'regular', label: 'Regular', strokeWidth: 1.5, fontWeight: 500 },
+  { key: 'medium', label: 'Medium', strokeWidth: 1.75, fontWeight: 600 },
+  { key: 'semibold', label: 'Semibold', strokeWidth: 2.25, fontWeight: 700 },
+  { key: 'bold', label: 'Bold', strokeWidth: 2.75, fontWeight: 800 },
+  { key: 'extrabold', label: 'Extra Bold', strokeWidth: 3.5, fontWeight: 900 },
+];
+
+const getVariantSvg = (svg, variantKey) => {
+  if (!svg || typeof svg !== 'string') return '';
+
+  const variant = VARIANT_OPTIONS.find((item) => item.key === variantKey) || VARIANT_OPTIONS[2];
+  let transformedSvg = svg;
+
+  transformedSvg = transformedSvg.replace(
+    /stroke-width\s*=\s*["']([^"']+)["']/gi,
+    `stroke-width="${variant.strokeWidth}"`
+  );
+  transformedSvg = transformedSvg.replace(
+    /stroke-width\s*:\s*([^;]+);?/gi,
+    `stroke-width: ${variant.strokeWidth};`
+  );
+  transformedSvg = transformedSvg.replace(
+    /font-weight\s*=\s*["']([^"']+)["']/gi,
+    `font-weight="${variant.fontWeight}"`
+  );
+  transformedSvg = transformedSvg.replace(
+    /font-weight\s*:\s*([^;]+);?/gi,
+    `font-weight: ${variant.fontWeight};`
+  );
+
+  const svgTagRegex = /<svg\b([^>]*)>/i;
+  transformedSvg = transformedSvg.replace(svgTagRegex, (match, attrs) => {
+    if (/stroke-width\s*=/.test(attrs) || /stroke-width\s*:/.test(attrs)) {
+      return match;
+    }
+
+    const stylePrefix = `stroke-width:${variant.strokeWidth};font-weight:${variant.fontWeight};`;
+
+    if (/style\s*=/.test(attrs)) {
+      return match.replace(/style\s*=\s*(["'])(.*?)\1/i, (_full, quote, existingStyle) => {
+        const mergedStyle = existingStyle ? `${existingStyle}; ${stylePrefix}` : stylePrefix;
+        return `style=${quote}${mergedStyle}${quote}`;
+      });
+    }
+
+    return `<svg${attrs} style="${stylePrefix}">`;
+  });
+
+  return transformedSvg;
+};
 
 const IconDetail = () => {
   const { id } = useParams();
@@ -19,18 +72,17 @@ const IconDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState('regular');
   const { theme } = useTheme();
 
   const [copied, setCopied] = useState(false);
+  const currentSvg = icon ? getVariantSvg(icon.svg, selectedVariant) : '';
 
   
   const handleCopy = async () => {
     try {
-    
-      await navigator.clipboard.writeText(icon.svg);
+      await navigator.clipboard.writeText(currentSvg || icon?.svg || '');
       setCopied(true);
-      
-      
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy!', err);
@@ -254,9 +306,26 @@ const IconDetail = () => {
               whileHover={{ scale: 1.05 }}
               className="relative flex-1 flex items-center justify-center p-4 bg-gradient-to-br from-gray-800/50 to-black dark:from-gray-800 dark:to-gray-600 rounded-lg"
             >
+              <div className="absolute left-3 bottom-3 flex flex-wrap gap-2 z-10">
+                {VARIANT_OPTIONS.map((variant) => (
+                  <button
+                    key={variant.key}
+                    type="button"
+                    onClick={() => setSelectedVariant(variant.key)}
+                    className={`rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                      selectedVariant === variant.key
+                        ? 'border-blue-500 bg-blue-500 text-white'
+                        : 'border-white/20 bg-white/10 text-white hover:bg-white/20'
+                    }`}
+                  >
+                    {variant.label}
+                  </button>
+                ))}
+              </div>
+
               <div
                 className="w-full h-64 flex items-center justify-center"
-                dangerouslySetInnerHTML={{ __html: icon.svg }}
+                dangerouslySetInnerHTML={{ __html: currentSvg || icon.svg }}
               />
               <div>
                 
