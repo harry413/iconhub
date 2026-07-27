@@ -83,7 +83,7 @@ const Favorites = () => {
           <div className="absolute h-72 w-72 rounded-[2rem] border border-sky-100 bg-sky-50/70 shadow-[0_20px_60px_rgba(14,165,233,0.12)] backdrop-blur-xl transform-gpu -rotate-12" />
         </motion.div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center rounded-[1.75rem] border border-white/70 bg-white/70 px-10 py-8 text-center shadow-[0_20px_80px_rgba(15,23,42,0.10)] backdrop-blur-2xl">
+        <div className="relative z-10 flex flex-col items-center justify-center rounded-[1.75rem] border border-white/70 bg-white/30 px-10 py-8 text-center shadow-[0_20px_80px_rgba(15,23,42,0.10)] backdrop-blur-2xl">
           <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.35em] text-slate-500">
             sign in required
           </div>
