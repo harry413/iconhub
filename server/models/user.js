@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: false },
   isAdmin: { type: Boolean, default: false },
   email: { type: String, required: true, unique: true },
-  password: { type: String },
+  password: { type: String, required : true },
   googleId: { type: String, unique: true, sparse: true }, // only for Google users
   avatar: { type: String },
   favorites: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Icon" }], default: [] },

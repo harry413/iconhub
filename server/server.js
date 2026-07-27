@@ -18,24 +18,28 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://iconhub-mu.vercel.app",          
+  "http://localhost:5000",
+  "https://iconhub-mu.vercel.app",
+  "https://iconhub.onrender.com",
 ];
 
 
-app.use(cookieParser());
-// Allow requests from the client URL and allow credentials
 app.use(cors({
-  origin: [function (origin, callback) {
+  origin: (origin, callback) => {
     if (!origin || origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS: ' + origin));
     }
   },
-]
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 mongoose.set('strictQuery', false);
 

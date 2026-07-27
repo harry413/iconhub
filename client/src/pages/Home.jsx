@@ -142,11 +142,12 @@ import ClientTestimonial from "../components/Client";
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
+              whileHover={{ y:20 }}
+              transition={{ delay: index * 0.2}}
               onMouseEnter={() => hoverSound.play()}
               className={`p-6 rounded-xl backdrop-blur-xs  ${
                 theme === "dark"
-                  ? " bg-transparent outline border-2 shadow-md shadow-gray-400 "
+                  ? " bg-transparent outline shadow-md shadow-gray-400 "
                   : "bg-gradient-to-r from-[#abbaab] to-[#ffffff] shadow-xl shadow-gray-900"
               }`}
             >
