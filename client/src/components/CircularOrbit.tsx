@@ -12,6 +12,7 @@ const orbitConfigs = [
 ];
 
 const CircularOrbit = () => {
+  
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen text-black dark:text-white overflow-hidden mask-b-from-20% mask-b-to-90%">
       
@@ -32,6 +33,7 @@ const CircularOrbit = () => {
         >
           {/* Place icons evenly around the circle */}
           {orbit.icons.map((Icon, iconIdx) => {
+
             const angle = (iconIdx / orbit.icons.length) * 2 * Math.PI;
             const x = orbit.radius * Math.cos(angle);
             const y = orbit.radius * Math.sin(angle);
