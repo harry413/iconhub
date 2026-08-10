@@ -157,15 +157,19 @@ const IconDetail = () => {
     // Check if icon is in favorites
         try {
           const token = localStorage.getItem('token');
+
           if (token) {
             const favResponse = await fetch(
               `${BASE_URL}/api/users/favorites/${id}/check`,
               {
+                 method: "GET",
                 headers: {
                   Authorization: `Bearer ${token}`,
+                   "Content-Type": "application/json",
                 },
               }
             );
+            
 
             if (favResponse.ok) {
               const favData = await favResponse.json();
@@ -228,8 +232,7 @@ const IconDetail = () => {
         serverError = parsed.message || JSON.stringify(parsed);
       } catch {}
 
-      console.log('Status:', response.status);
-      console.log('Server:', serverError);
+      
       if (!response.ok) {
         throw new Error(serverError || 'Failed to update favorites');
       }

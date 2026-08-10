@@ -2,13 +2,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sun, Moon, Star, Cloud, Leaf, Sparkles } from "lucide-react";
+
 import React from "react";
+import {Bike, Fan, Flame, Rocket, Music,Bug } from "@harry413/icons" 
 
 const orbitConfigs = [
-  { radius: 100, duration: 20, icons: [Sun, Moon, Star, Leaf, Sparkles] },
-  { radius: 180, duration: 30, icons: [Star, Cloud, Leaf, Sparkles, Moon] },
-  { radius: 250, duration: 40, icons: [Sparkles, Star, Moon, Leaf, Leaf] },
+  { radius: 100, duration: 20, icons: [Fan,Bike ,Flame , Rocket, Music, Bug] },
+  { radius: 180, duration: 30, icons: [Bug,  Rocket, Music, Bike] },
+  { radius: 250, duration: 40, icons: [Music,Flame ,Bike , Rocket, Bug, Rocket] },
 ];
 
 const CircularOrbit = () => {
@@ -24,15 +25,17 @@ const CircularOrbit = () => {
             width: orbit.radius * 2,
             height: orbit.radius * 2,
           }}
-          animate={{ rotate: [0, 360] }}
+          animate ={{
+            rotate : [0, 180, 360]
+          }}
           transition={{
             repeat: Infinity,
             duration: orbit.duration,
             ease: "linear",
-          }}
-        >
+          }} >
           {/* Place icons evenly around the circle */}
-          {orbit.icons.map((Icon, iconIdx) => {
+          {orbit
+          ?.icons.map((Icon, iconIdx) => {
 
             const angle = (iconIdx / orbit.icons.length) * 2 * Math.PI;
             const x = orbit.radius * Math.cos(angle);
@@ -62,7 +65,7 @@ const CircularOrbit = () => {
 
       {/* Center Text */}
       <div className="relative z-30 text-center mt-10">
-        <h1 className="text-2xl md:text-5xl font-bold text-[#111111] dark:text-[#d3d3d3]">Animated Icons</h1>
+        <h1 className="text-2xl md:text-5xl font-bold text-[#2f4f4f] dark:text-[#d3d3d3]">Animated Icons</h1>
         <p className="text-black dark:text-gray-200 mt-4 max-w-lg">
           Go through our bunddle of animated SVG icons To make your application more intractive.
         </p>

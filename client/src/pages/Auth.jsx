@@ -70,14 +70,13 @@ const Auth = () => {
       navigate('/');
     } catch (err) {
       errorSound.play();
-      console.log(err);
+    
       setError('Failed to authenticate with Google');
     }
   };
 
   const handleGoogleFailure = (error) => {
     errorSound.play();
-    console.log(error)
     setError(error.message || 'Google login failed');
   };
 
